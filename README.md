@@ -1,5 +1,6 @@
 ## Sobre o projeto
 
+![ezgif-2-926126238735 (1)](https://user-images.githubusercontent.com/71731452/111242959-f4ba0e00-85de-11eb-873b-32ca87556165.gif)
 
 
 Starla trata-se de um BOT desenvolvido em Node.js capaz de criar "stickers" para WhatsApp com facilidade.
