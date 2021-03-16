@@ -19,9 +19,6 @@ Trata-se de um BOT desenvolvido em Node.js capaz de criar rapidamente "stickers"
 * Vincule uma conta do twitter ao ThingSpeak.
 * Crie um "channel" no ThingSpeak com 3 "Fields" para registrar as leituras(umidade_solo, umidade_ar e temperatura).
 
-![Sem título](https://user-images.githubusercontent.com/71731452/111236804-78b9c900-85d2-11eb-886d-4f2d571e07b4.png)
-
-
 
 ### Pré-requisitos
 
