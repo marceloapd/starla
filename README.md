@@ -2,7 +2,8 @@
 Trata-se de um BOT desenvolvido em Node.js capaz de criar rapidamente "stickers"  para WhatsApp.
 
 
-![ezgif-2-926126238735 (1)](https://user-images.githubusercontent.com/71731452/111242959-f4ba0e00-85de-11eb-873b-32ca87556165.gif)   ![lost_in_memories_by_andrewleon_d6zcre1-fullview-removebg-preview](https://user-images.githubusercontent.com/71731452/111243659-39927480-85e0-11eb-9514-db13f756f167.png)
+![ezgif-2-926126238735 (1)](https://user-images.githubusercontent.com/71731452/111242959-f4ba0e00-85de-11eb-873b-32ca87556165.gif)   ![sadasdsad](https://user-images.githubusercontent.com/71731452/111244354-7d39ae00-85e1-11eb-9e44-b1116645414e.png)
+
 
 
 
