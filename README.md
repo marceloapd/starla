@@ -1,19 +1,15 @@
 ## Sobre o projeto
 
-![Sem título (1)](https://user-images.githubusercontent.com/71731452/111238623-2f6b7880-85d6-11eb-9a0e-115589110727.png)                ![121123 (1)](https://user-images.githubusercontent.com/71731452/111239249-8cb3f980-85d7-11eb-9f03-bcb370dddd6a.jpg)                ![git (1)](https://user-images.githubusercontent.com/71731452/111239743-98ec8680-85d8-11eb-883c-d0815fbeb807.jpg)
-
-
+![Sem título (1)](https://user-images.githubusercontent.com/71731452/111238623-2f6b7880-85d6-11eb-9a0e-115589110727.png)                ![121123 (1)](https://user-images.githubusercontent.com/71731452/111239249-8cb3f980-85d7-11eb-9f03-bcb370dddd6a.jpg)                ![git (1)](https://user-images.githubusercontent.com/71731452/111239743-98ec8680-85d8-11eb-883c-d0815fbeb807.jpg)  ![teste black mode (1)](https://user-images.githubusercontent.com/71731452/111240166-79a22900-85d9-11eb-9f9e-0c5af0f8c346.jpg)
 
 
 
 Starla trata-se de um BOT desenvolvido em Node.js capaz de criar "stickers" para WhatsApp com facilidade.
 
-Este projeto consiste em desenvolver um dispositivo capaz de notificar as necessidades de uma planta domestica.
 
 ### Construido com
 
-* [Proteus Design Suite](https://www.labcenter.com/)
-* [PlatformIO](https://platformio.org/)
+* [Venom-bot](https://www.npmjs.com/package/venom-bot)
 
 
 ## Começando
