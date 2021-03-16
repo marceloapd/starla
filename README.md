@@ -39,7 +39,7 @@ Trata-se de um BOT desenvolvido em Node.js capaz de criar rapidamente "stickers"
 
 ## Uso
 
-Atualmente a Starla consegue criar figurinhas e consumir a API do sinesp, sendo assim pode fornecer dados de qualquer veiculo.
+Starla alem de criar figurinhas consegue consumir a API do sinesp, sendo assim pode fornecer dados de qualquer veiculo.
 
 ![sinesppngg (1)](https://user-images.githubusercontent.com/71731452/111247057-1f5b9500-85e6-11eb-841d-77c716b23dd0.png)
 
