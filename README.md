@@ -34,7 +34,7 @@ Starla alem de criar figurinhas consegue consumir a API do SINESP, sendo assim p
 
 ## Uso
 
-Atualmente a Starla está online 24h por dia, você pode testa-la no [numero](+55 61 98404-7093)
+Atualmente a Starla está online 24h por dia, você pode testa-la no _55 61 98404-7093_
 
 
 ## Roadmap
