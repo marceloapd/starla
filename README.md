@@ -25,9 +25,8 @@ Trata-se de um BOT desenvolvido em Node.js capaz de criar rapidamente "stickers"
 
 ### Pré-requisitos
 
-* Sensor de Umidade do Solo
-* ESP8266
-* DHT 22
+* Node.js
+* WhatsApp
 
 ### Instalação
 
@@ -40,9 +39,9 @@ Trata-se de um BOT desenvolvido em Node.js capaz de criar rapidamente "stickers"
 
 ## Uso
 
-Atualmente o dispositivo de PlantaloT consegue notificar via twitter o valor de seus sensores de umidade do solo, umidade do ar e temperatura
+Atualmente a Starla consegue criar figurinhas e consumir a API do sinesp, sendo assim pode fornecer dados de qualquer veiculo.
 
-Para obter exemplos, abra o [twitter](https://twitter.com/do_planta)
+![sinesppngg (1)](https://user-images.githubusercontent.com/71731452/111247057-1f5b9500-85e6-11eb-841d-77c716b23dd0.png)
 
 
 ## Roadmap
