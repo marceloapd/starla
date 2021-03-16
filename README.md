@@ -2,11 +2,7 @@
 Trata-se de um BOT desenvolvido em Node.js com foco em criar rapidamente "stickers"  para WhatsApp.
 
 
-![ezgif-2-926126238735 (1)](https://user-images.githubusercontent.com/71731452/111242959-f4ba0e00-85de-11eb-873b-32ca87556165.gif)   ![sadasdsad](https://user-images.githubusercontent.com/71731452/111244354-7d39ae00-85e1-11eb-9e44-b1116645414e.png)
-
-
-
-
+![ezgif-2-926126238735 (1)](https://user-images.githubusercontent.com/71731452/111242959-f4ba0e00-85de-11eb-873b-32ca87556165.gif)   ![sadasdsad](https://user-images.githubusercontent.com/71731452/111244354-7d39ae00-85e1-11eb-9e44-b1116645414e.png) 
 
 ### Construido com
 
@@ -32,13 +28,18 @@ Trata-se de um BOT desenvolvido em Node.js com foco em criar rapidamente "sticke
 3. Clone o repositorio https://github.com/marceloapd/PlantaloT
 4. Importe o projeto para o PlataformIO
 5. Suba o firmware para o ESP8266
-   
+
+## Outras funcionalidades 
+
+Starla alem de criar figurinhas consegue consumir a API do SINESP, sendo assim pode fornecer dados de qualquer veiculo.
+
+![teste (1)](https://user-images.githubusercontent.com/71731452/111247678-3058d600-85e7-11eb-86bf-3a4a4e35a96f.png)
 
 ## Uso
 
-Starla alem de criar figurinhas consegue consumir a API do sinesp, sendo assim pode fornecer dados de qualquer veiculo.
+Atualmente o dispositivo de PlantaloT consegue notificar via twitter o valor de seus sensores de umidade do solo, umidade do ar e temperatura
 
-![teste (1)](https://user-images.githubusercontent.com/71731452/111247678-3058d600-85e7-11eb-86bf-3a4a4e35a96f.png)
+Para obter exemplos, abra o [twitter](https://twitter.com/do_planta)
 
 
 ## Roadmap
