@@ -1,4 +1,5 @@
 const sinespApi = require('sinesp-api');
+const instructions = require("./instructions.js")
 
 const pesquisarPlaca = async function (placa) {
     try {
@@ -10,19 +11,23 @@ const pesquisarPlaca = async function (placa) {
 
 }
 const enviarDados = function (client, message) {
+
     let placa = message.body.split(" ")[1]
     let dados = ``
     pesquisarPlaca(placa)
         .then(function (response) {
             client
-                .sendText(message.from, "Aqui está os dados da placa informada") // message.from se refere a quem enviou a mensagem
+                
             for (keys in response) {
                 dados += `*➤ ${keys}*: ${response[keys]}\n`
 
             }
-            client.sendText(message.from, dados)
+            client.sendText(message.from, "Aqui estão os dados da placa informada Marcelo Augusto ⤵️\n" + dados + "\n\n_" + instructions.nomeEmocao(message) + " se puder me ajude a permanecer viva ☺️ apoiando meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com_")
         })
-}
+        
+    }
+
+    
 
 
 module.exports = {

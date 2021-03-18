@@ -3,7 +3,7 @@ const sendImageSticker = async (client, message) =>{
         const base = await client.downloadMedia(message)
         await base64Converter(base, "copy.png")
         await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
-        sendResponse("Aqui está sua Figurinha " + message.sender.pushname, client, message)
+        sendResponse( message.sender.pushname + "aqui está sua Figurinha\n\n", client, message)
         console.log(`[${message.sender.id}] Figurinha criada`)
 
     } catch (e) {
