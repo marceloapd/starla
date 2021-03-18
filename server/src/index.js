@@ -35,7 +35,7 @@ async function start(client) {
 
             else if (body) {
             if (message.body.toLowerCase().startsWith("#pl") && message.isGroupMsg === true){
-                
+
                 if (comando.validacao(message,client, "#placa")){
                     sinesp.enviarPlaca(client, message)
                 }
@@ -45,8 +45,10 @@ async function start(client) {
 
             //envia uma figurinha quando a imagem tem uma legenda
             else if (caption) {
-                if (message.caption.startsWith("#figurinha") || message.caption.startsWith("#FIGURINHA") && message.isGroupMsg === true) {
-                    figurinha.enviarFigurinha(client, message)
+                if (message.caption.startsWith("#fig") || message.caption.startsWith("#FIGURINHA") && message.isGroupMsg === true) {
+                    if (comando.validacao(message,client, "#figurinha")){
+                        figurinha.enviarFigurinha(client, message)  
+                    }
                 }
             }
             //envia figurinha para uma imagem que foi marcada em um reply
