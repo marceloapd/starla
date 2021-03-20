@@ -1,8 +1,17 @@
-function validacao(message, client, comandos){
+function validacaoCaption(client, message, comandos){
     
-    if (message.body.split(" ")[0] != comandos){
+    if (message.caption.split(" ")[0].toLowerCase() != comandos){
+        client.reply(message.from,"Acredito que você quis dizer "+comandos+" 😄 , _lembre-se que se tiver em duvida sobre algum comando digite #comandos_", message.id)
+        return false
+    }else{
+        return true
+    }
+}
 
-        client.reply(message.from,"Você quis dizer " + comandos, message.id)
+function validacao(client, message, comandos){
+    
+    if (message.body.toLowerCase().split(" ")[0].toLowerCase() != comandos){
+        client.reply(message.from,"Acredito que você quis dizer "+comandos+" 😄 , _lembre-se que se tiver em duvida sobre algum comando digite #comandos_", message.id)
         return false
     }else{
         return true
@@ -12,5 +21,6 @@ function validacao(message, client, comandos){
 
 
 module.exports = {
-    validacao: validacao
+    validacao: validacao,
+    validacaoCaption: validacaoCaption
 }

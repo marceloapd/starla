@@ -1,24 +1,31 @@
+const instructions = require("./instructions.js")
+
 const sendImageSticker = async (client, message) =>{
     try {
         const base = await client.downloadMedia(message)
         await base64Converter(base, "copy.png")
         await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
-        sendResponse( message.sender.pushname + "aqui está sua Figurinha\n\n", client, message)
         console.log(`[${message.sender.id}] Figurinha criada`)
+        client.sendImageAsStickerGif(message.from, './emojis/pixEmoji.gif')
+        sendResponse("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
+        
 
     } catch (e) {
         console.log("Error: ", e)
         // messageError(e, message, client)
     }
+    
 }
+
 
 const replySendImageSticker = async function (client, message) {
     try {
         const base = await client.downloadMedia(message.quotedMsgObj.id)
         base64Converter(base, "copy.png")
-        sendResponse("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
         await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
         console.log(`[${message.sender.id}] Figurinha criada por reply`)
+        client.sendImageAsStickerGif(message.from, './emojis/pixEmoji.gif')
+        sendResponse("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
 
     } catch (e) {
         console.log("Error:", e)

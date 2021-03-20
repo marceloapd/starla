@@ -75,9 +75,9 @@
   }
     
   module.exports = {
-
-    enviarComandosGroup: chatComandos,
-    enviarComandosChat: groupComandos,
+    
+    enviarComandosGroup: groupComandos,
+    enviarComandosChat: chatComandos,
     nomeEmocao: nome_emocao
 
   }

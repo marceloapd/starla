@@ -11,6 +11,6 @@
   "dependencies": {
     "animated_gif": "^1.0.2",
     "sinesp-api": "^3.0.0",
-    "venom-bot": "^3.0.10"
+    "venom-bot": "^3.0.8"
   }
 }
