@@ -3,7 +3,9 @@ const instructions = require("./controllers/instructions")
 const figurinha = require("./controllers/figurinha")
 const sinesp = require("./controllers/sinesp")
 const comando = require("./validations/comandos")
-const comandos = require('./validations/comandos')
+const regex = require('./validations/placas')
+var ffmpeg = require('ffmpeg');
+
 
 //instancia do whatsapp
 
@@ -30,12 +32,20 @@ async function start(client) {
                 instructions.enviarComandosGroup(client, message)
             }
 
-            else if(message.body.match(/([\w])([\w])([\w])([0-9])([0-9])([0-9])([0-9])/) && message.type === 'chat' &&message.isGroupMsg === false){
-                console.log("placa provate")
-                placa = (message.body.match(/([\w])([\w])([\w])([0-9])([0-9])([0-9])([0-9])/)[0])
+            else if(message.body.match(regex.validacao.placa3) && message.type === 'chat' &&message.isGroupMsg === false){
+                placa = message.body
                 sinesp.enviarPlacaChat(client, message, placa)
             }
-            // AAA0A00 AAA00A0 AAA0000
+
+            else if(message.body.match(regex.validacao.placa2) && message.type === 'chat' &&message.isGroupMsg === false){
+                placa = message.body
+                sinesp.enviarPlacaChat(client, message, placa)
+            }
+
+            else if(message.body.match(regex.validacao.placa1) && message.type === 'chat' &&message.isGroupMsg === false){
+                placa = message.body
+                sinesp.enviarPlacaChat(client, message, placa)
+            }
 
             //mostra os comando no privado ao receber uma mensagem
             else if (message.type === 'chat' && message.isGroupMsg === false){
@@ -69,11 +79,12 @@ async function start(client) {
             }
 
 
-            //envia figurinha sem legenda no chat privado
+            envia figurinha sem legenda no chat privado
             else if (message.isMedia === true && message.isGroupMsg === false){
                 figurinha.enviarFigurinha(client, message)
                 
             }
+
             
         }
         catch (error) {

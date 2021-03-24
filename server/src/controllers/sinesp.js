@@ -22,7 +22,7 @@ const enviarDados = function (client, message) {
                 dados += `*➤ ${keys}*: ${response[keys]}\n`
 
             }
-            client.sendText(message.from, "Aqui estão os dados da placa informada Marcelo Augusto ⤵️\n\n" + dados + "\n\n_" + instructions.nomeEmocao(message) + " se puder me ajude a permanecer viva ☺️ apoiando meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com_")
+            client.sendText(message.from, "Aqui estão os dados da placa informada " + message.sender.pushname +"⤵️\n\n" + dados + "\n\n_" + instructions.nomeEmocao(message) + " se puder me ajude a permanecer viva ☺️ apoiando meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com_")
         })
         
     }
@@ -37,7 +37,7 @@ const enviarDadosChat = function (client, message, placa) {
                 dados += `*➤ ${keys}*: ${response[keys]}\n`
 
             }
-            client.sendText(message.from, "Aqui estão os dados da placa informada Marcelo Augusto ⤵️\n\n" + dados + "\n\n_" + instructions.nomeEmocao(message) + " se puder me ajude a permanecer viva ☺️ apoiando meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com_")
+            client.sendText(message.from, "Aqui estão os dados da placa informada " + message.sender.pushname +"⤵️\n\n" + dados + "\n\n_" + instructions.nomeEmocao(message) + " se puder me ajude a permanecer viva ☺️ apoiando meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com_")
         })
         
     }
