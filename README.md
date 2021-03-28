@@ -39,7 +39,7 @@ Atualmente a Starla está online 24h por dia, você pode testa-la no _55 61 9840
 
 ## Roadmap
 
-Consulte os [issues](https://github.com/marceloapd/Starla/issues) para obter uma lista de recursos propostos (e problemas conhecidos).
+Consulte os [issues](https://github.com/AssisDev/starla/issues) para obter uma lista de recursos propostos (e problemas conhecidos).
 
 
 ## Contribuindo
@@ -49,12 +49,3 @@ Contribuição de novas funcionalidades serão bem vindas.
 ## Licença
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
-## Contato
-
-Marcelo Assis - [@marceloapda](https://twitter.com/marceloapda) - marcelo.apdassis@gmail.com
-
-Link do Projeto: [https://github.com/marceloapd/Starla](https://github.com/marceloapd/Starla)
-
