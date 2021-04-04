@@ -1,4 +1,3 @@
-
 let observadores = []
 
 function notificarTodos(comando, message, client){
@@ -12,7 +11,7 @@ function inscrever(func){
 }
 
 function deletar(func){
-
+    
 }
 
 module.exports = {

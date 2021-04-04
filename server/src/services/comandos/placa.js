@@ -1,8 +1,8 @@
-const sub = require("../controllers/sub")
+const sub = require("../controllers/comandos").inscrever
 
 function run(comando, message, client){
     console.log("Pesquisando Placa")
 }
 
 
-sub.inscrever(run)
+inscrever(run)

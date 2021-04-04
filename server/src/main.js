@@ -1,5 +1,5 @@
 const venom = require('venom-bot')
-const sub = require("./controllers/sub")
+const notificarTodos = require("./controllers/comandos").notificarTodos
 const validacao = require("./validations/comandos/comandos")
 require("./services")
 
@@ -17,7 +17,7 @@ async function start(client) {
     client.onMessage(function (message) {  
         result = validacao.validar(message, client)
         if(result){
-            sub.notificarTodos(result, message, client)
+            notificarTodos(result, message, client)
         }
     })
 }
