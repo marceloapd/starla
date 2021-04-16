@@ -1,13 +1,12 @@
-let observadores = []
+let observadores = {}
 
-function notificarTodos(comando, message, client){
-    for (func in observadores){
-        observadores[func](comando, message, client)
-    }   
+function chamarComando(comando, message, client){
+    let comando_formatado = comando.split(" ")
+    observadores[comando_formatado](comando, message, client) 
 }
 
-function inscrever(func){
-    observadores.push(func)
+function inscrever(nomeComando, func){
+    observadores[nomeComando] = func
 }
 
 function deletar(func){
@@ -15,7 +14,7 @@ function deletar(func){
 }
 
 module.exports = {
-    notificarTodos,
+    chamarComando: chamarComando,
     inscrever,
     deletar
 }

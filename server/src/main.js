@@ -1,6 +1,5 @@
 const venom = require('venom-bot')
-const notificarTodos = require("./controllers/comandos").notificarTodos
-const validacao = require("./validations/comandos/comandos")
+const chamarComando = require("./controllers/comandos").chamarComando
 require("./services")
 
 //Instancia do whatsapp
@@ -14,11 +13,8 @@ venom.create()
 
 //Função que inicia o bot
 async function start(client) {
-    client.onMessage(function (message) {  
-        result = validacao.validar(message, client)
-        if(result){
-            notificarTodos(result, message, client)
-        }
+    client.onMessage(function (message) { 
+            chamarComando(result, message, client)
     })
 }
 

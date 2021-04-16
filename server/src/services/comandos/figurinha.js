@@ -1,8 +1,45 @@
-const sub = require("../../controllers/comandos").inscrever
+const inscrever = require("../../controllers/comandos").inscrever
 
-function run(comando, message, client){
-    console.log("Criando figurinha")
+async function run(comando, message, client){
+    try {
+        const base = await client.downloadMedia(message)
+        await converterBase64(base, "copy.png")
+        await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
+        console.log(`[${message.sender.id}] Figurinha criada`)
+        client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
+        enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
+    } catch (e) {
+        console.log("Error ao criar figurinha: ", e)
+    }
+    
 }
 
+const replySendImageSticker = async function (client, message) {
+    try {
+        const base = await client.downloadMedia(message.quotedMsgObj.id)
+        converterBase64(base, "copy.png")
+        await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
+        console.log(`[${message.sender.id}] Figurinha criada por reply`)
+        await client.sendImageAsStickerGif(message.from, './assets/images/copy.png')
+        await enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
 
-inscrever(run)
+    } catch (e) {
+        console.log("Error:", e)
+    }
+}
+
+const converterBase64 =async function (base, file_name) {
+    let formated_base = base.split(",")[1]
+    const fs = require('fs')
+    await fs.writeFileSync(`./assets/images/${file_name}`, formated_base, { encoding: 'base64' })
+}
+
+const enviarResposta = async function (text, client, message) {
+    try {
+        await client.reply(message.from, `${text}`, message.id)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+inscrever("#figurinha", run)
