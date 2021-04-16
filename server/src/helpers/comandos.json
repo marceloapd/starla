@@ -1,0 +1,21 @@
+[
+    {
+        "figurinha":{
+            "comando":"#figurinha",
+            "grupo":{
+                
+            },
+            "privado":{
+                "type":["video", "image"]
+
+            },
+            "descrição":""
+        }
+    },
+    {
+        "horoscopo":{
+            "comando":"#horoscopo",
+            "descrição":""
+        }
+    }
+]

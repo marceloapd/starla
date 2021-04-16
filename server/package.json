@@ -1,7 +1,7 @@
 {
-  "name": "projeto-whats",
+  "name": "starla",
   "version": "1.0.0",
-  "description": "Um bot para whatsapp",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,9 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "animated_gif": "^1.0.2",
-    "ffmpeg": "0.0.4",
-    "sinesp-api": "^3.0.0",
     "venom-bot": "^3.0.8"
   }
 }
