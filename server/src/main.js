@@ -14,7 +14,7 @@ venom.create()
 //Função que inicia o bot
 async function start(client) {
     client.onMessage(function (message) { 
-            chamarComando(result, message, client)
+        chamarComando(message.caption || message.body ,message, client)
     })
 }
 
