@@ -114,4 +114,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-tokens/
+src/tokens/session.data.json
+copy.png

@@ -2,7 +2,7 @@ const venom = require('venom-bot')
 const chamarComando = require("./controllers/comandos").chamarComando
 const verificarValidacao = require("./validations/comandos").verificarValidacao
 const enviarMensagemError = require("./helpers/mensageiro").enviarMensagemError
-require("./services")
+require("./incializador.js")
 
 //Instancia do whatsapp
 venom.create()
