@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsdom": "^16.5.3",
+    "request": "^2.88.2",
     "venom-bot": "^3.0.8"
   }
 }
