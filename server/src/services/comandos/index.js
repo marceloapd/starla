@@ -1,2 +1,2 @@
 require("./figurinha")
-require("./placa")
+require("./horoscopo")

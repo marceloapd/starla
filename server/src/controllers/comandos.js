@@ -1,10 +1,8 @@
 let observadores = {}
 
 function chamarComando(comando, message, client){
-    console.log(comando)
-    let comando_formatado = comando.split(" ")
+    let comando_formatado = comando.split(" ")[0]
     observadores[comando_formatado](comando, message, client) 
-    console.log(comando_formatado)
 }
 
 function inscrever(nomeComando, func){
