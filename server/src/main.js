@@ -1,7 +1,7 @@
 const venom = require('venom-bot')
 const chamarComando = require("./controllers/comandos").chamarComando
-const validar = require("./validations/comandos").validar
-const enviar_mensagem = require("./helpers/mensageiro").enviar_mensagem
+const verificarValidacao = require("./validations/comandos").verificarValidacao
+const enviarMensagemError = require("./helpers/mensageiro").enviarMensagemError
 require("./services")
 
 //Instancia do whatsapp
@@ -16,8 +16,11 @@ venom.create()
     //Função que inicia o bot
     async function start(client) {
         client.onMessage(function (message) { 
-            validar(message, function(){
-                continue
+            verificarValidacao(message, (erro, comandoValido) => {
+                if (erro){
+                    return enviarMensagemError(message, client, erro)
+                }
+                chamarComando(comandoValido, message, client)
             }) 
     })
 }

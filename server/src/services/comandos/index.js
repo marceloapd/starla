@@ -1,2 +1,1 @@
 require("./figurinha")
-require("./placa")

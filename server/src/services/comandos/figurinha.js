@@ -20,7 +20,7 @@ const replySendImageSticker = async function (client, message) {
         converterBase64(base, "copy.png")
         await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
         console.log(`[${message.sender.id}] Figurinha criada por reply`)
-        await client.sendImageAs    StickerGif(message.from, './assets/images/copy.png')
+        await client.sendImageAsStickerGif(message.from, './assets/images/copy.png')
         await enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
 
     } catch (e) {
