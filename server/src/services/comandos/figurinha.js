@@ -9,8 +9,11 @@ async function run(comando, message, client){
 }
 
 async function figurinha(message, client){
-    if(message.quotedMsg.type === 'image'){
-        replySendImageSticker(client,message)
+    if(message.quotedMsg){
+        if(message.quotedMsg.type === 'image'){
+            replySendImageSticker(client,message)
+        
+        }
     }else{
         const base = await client.downloadMedia(message)
         await converterBase64(base, "copy.png")
