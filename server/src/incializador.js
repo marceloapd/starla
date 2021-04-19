@@ -1,2 +1,1 @@
 require("./services")
-require("./models")

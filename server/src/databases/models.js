@@ -19,9 +19,11 @@ const Horoscopo = sequelize.define('Horoscopo', {
     }
 })
 
-sequelize.sync({ force: true }).then(()=>{
-    console.log("Tabelas Criadas!")
-})
+//Atenção!! Só descomente se souber usar
+// sequelize.sync({ force: true }).then(()=>{
+//     console.log("Tabelas Criadas!")
+// })
+
 module.exports = {
     Horoscopo
 }
