@@ -21,7 +21,7 @@ venom.create()
                     if (erro){
                         return mensageiro.enviarMensagemError(message, client, erro)
                     }
-                    chamarComando(comandoValido, message, client)
+                    await chamarComando(comandoValido, message, client)
                 }catch(e){
                     mensageiro.enviarMensagem(message, client, e.message)
                 }

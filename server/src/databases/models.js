@@ -7,23 +7,25 @@ const Horoscopo = sequelize.define('Horoscopo', {
         unique: true,
         allowNull: false
     },
-    signo:{
+    signos:{
         type: DataTypes.ARRAY(DataTypes.TEXT),
     },
     isCadastrado: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        defaultValue: true
     },
     isDeleted: {
         type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 })
 
-//Atenção!! Só descomente se souber usar
+// Atenção!! Só descomente se souber usar
 // sequelize.sync({ force: true }).then(()=>{
 //     console.log("Tabelas Criadas!")
 // })
 
 module.exports = {
-    Horoscopo
+    Horoscopo,
+    sequelize
 }

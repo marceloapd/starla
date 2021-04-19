@@ -1,6 +1,8 @@
 const inscrever = require("../../controllers/comandos").inscrever
 const request = require('request');
 const { JSDOM } = require('jsdom')
+const db = require('../../databases/models').Horoscopo
+const sequelize = require('../../databases/models').sequelize
 
 let signos = [
     "aquario", "peixes", "aries", "touro", "gemeos",
@@ -13,7 +15,7 @@ let comandosValidos = {
     "sair" : desativarHoroscopo
 }
 
-function run(comando, message, client){
+async function run(comando, message, client){
     let comandoSecundario = comando.split(" ")[1].toLowerCase()
     if (signos.includes(comandoSecundario)){
         let signo = comandoSecundario.toLowerCase()
@@ -41,12 +43,23 @@ function gerarHoroscopo(signo,message,client){
 });
 }
 
-function cadastrarHoroscopo(signo, message, client){
-    console.log("Signo Cadastrado")
+async function cadastrarHoroscopo(signo, message, client){
+    let [user, created] = await db.findOrCreate({
+        where:{
+            numero:message.from,
+        }
+    })
+    user.signos = [()=>"oi"]
+    await user.save()
+    console.log(user.toJSON().signos)
 } 
 
 function desativarHoroscopo(signo, message, client){
     console.log("Signo diario desativado")
 }
+message = {
+    'from':'511242'
+}
+cadastrarHoroscopo('leao', message, 'oi')
 
 inscrever("#horoscopo", run)

@@ -41,13 +41,13 @@ async function replySendImageSticker (client, message) {
     }
 }
 
-const converterBase64 =async function (base, file_name) {
+async function converterBase64(base, file_name) {
     let formated_base = base.split(",")[1]
     const fs = require('fs')
-    await fs.writeFileSync(`./assets/images/${file_name}`, formated_base, { encoding: 'base64' })
+    fs.writeFileSync(`./assets/images/${file_name}`, formated_base, { encoding: 'base64' })
 }
 
-const enviarResposta = async function (text, client, message) {
+async function enviarResposta   (text, client, message) {
     try {
         await client.reply(message.from, `${text}`, message.id)
     } catch (e) {
