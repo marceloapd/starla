@@ -15,7 +15,7 @@ venom.create()
     
     //Função que inicia o bot
     async function start(client) {
-        client.onMessage(function (message) {
+        client.onMessage(async function (message) {
             verificarValidacao(message, (erro, comandoValido) => {
                 try{
                     if (erro){

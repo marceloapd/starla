@@ -9,18 +9,21 @@ async function run(comando, message, client){
 }
 
 async function figurinha(message, client){
-    if(message.quotedMsg){
-        if(message.quotedMsg.type === 'image'){
-            replySendImageSticker(client,message)
-        
+    try{
+        if(message.quotedMsg){
+            if(message.quotedMsg.type === 'image'){
+                replySendImageSticker(client,message)
+            }
+        }else{
+            const base = await client.downloadMedia(message)
+            await converterBase64(base, "copy.png")
+            await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
+            console.log(`[${message.sender.id}] Figurinha criada`)
+            client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
+            enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
         }
-    }else{
-        const base = await client.downloadMedia(message)
-        await converterBase64(base, "copy.png")
-        await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
-        console.log(`[${message.sender.id}] Figurinha criada`)
-        client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
-        enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
+    }catch(e){
+        console.log("Error ao criar figurinha: ", e)
     }
 }
 
