@@ -1,0 +1,3 @@
+function responder(client, message){
+        
+}

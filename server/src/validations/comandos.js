@@ -1,26 +1,48 @@
-function validacaoCaption(client, message, comandos){
-    
-    if (message.caption.split(" ")[0].toLowerCase() != comandos){
-        client.reply(message.from,"Acredito que você quis dizer "+comandos+" 😄 , _lembre-se que se tiver em duvida sobre algum comando digite #comandos_", message.id)
-        return false
-    }else{
-        return true
+function verificarValidacao(message, callback){
+    comando = validarComando(getComandoByTipo(message))
+    if (comando.status == "invalido"){
+        return callback(comando)
     }
-}
-
-function validacao(client, message, comandos){
-    
-    if (message.body.toLowerCase().split(" ")[0].toLowerCase() != comandos){
-        client.reply(message.from,"Acredito que você quis dizer "+comandos+" 😄 , _lembre-se que se tiver em duvida sobre algum comando digite #comandos_", message.id)
-        return false
-    }else{
-        return true
+    else if(comando.status == "talvez"){
+        return callback(comando)
     }
+    callback(null, comando.comandoCompleto)
 }
 
-
-
-module.exports = {
-    validacao: validacao,
-    validacaoCaption: validacaoCaption
+function getComandoByTipo(message){
+    tipos = ['caption', 'reply']
+    for(index in tipos){
+        if(message[tipos[index]]){
+            return message[tipos[index]]
+        }
+    }
+    return message.body
 }
+ 
+function validarComando(comandoRecebido){
+    let comandoPrimario = comandoRecebido.split(" ")[0].toLowerCase()
+    let comandos = getComandos()
+    comandos.forEach((item, index, array)=>{
+        array[index] = item.comando 
+    })
+    let response = {}
+    for(index in comandos){
+        if (comandoPrimario.startsWith(comandos[index].substring(0, 4))){
+            [response['message'], response['status']] = [comandos[index], "talvez"]
+            if(comandoPrimario == comandos[index]){
+                [response['status'], response['comandoCompleto']] = ["valido", comandoRecebido]
+                return response
+            }
+            return response
+        }
+    }
+    response['status'] = 'invalido'
+    return response
+}
+
+function getComandos(){
+    const fs = require('fs')
+    return  JSON.parse(fs.readFileSync("./helpers/comandos.json"))
+}
+
+module.exports = {verificarValidacao}
