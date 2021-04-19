@@ -8,4 +8,11 @@ function enviarMensagemError(message, client, erro){
     client.reply(message.from, texto, message.id)
 }
 
-module.exports = {enviarMensagemError}
+function enviarMensagem(message, client, texto){
+    client.reply(message.from, texto, message.id)
+}
+
+module.exports = {
+    enviarMensagemError,
+    enviarMensagem
+}
