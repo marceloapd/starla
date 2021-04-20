@@ -116,3 +116,4 @@ dist
 .pnp.*
 src/tokens/session.data.json
 copy.png
+server/src/tokens/session.data.json
