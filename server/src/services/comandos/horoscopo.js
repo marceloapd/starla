@@ -1,7 +1,7 @@
 const inscrever = require("../../controllers/comandos").inscrever
 const request = require('request');
 const { JSDOM } = require('jsdom')
-const db = require('../../databases/models').Horoscopo
+const db = require('../../databases/models').User
 const sequelize = require('../../databases/models').sequelize
 
 let signos = [
@@ -15,15 +15,18 @@ let comandosValidos = {
     "sair" : desativarHoroscopo
 }
 
-async function run(comando, message, client){
-    let comandoSecundario = comando.split(" ")[1].toLowerCase()
-    if (signos.includes(comandoSecundario)){
-        let signo = comandoSecundario.toLowerCase()
+function run(comando, message, client){
+    let comandoSecundario = comando.split(" ")[1] || null
+    if(!comandoSecundario){
+        throw({"message":"Acho que você esqueceu de inserir o signo"})
+    }
+    if ( signos.includes(comandoSecundario)){
+        let signo = comandoSecundario
         gerarHoroscopo(signo,message,client)
         return
     }
     else if(comandosValidos[comandoSecundario]){
-        let [comandoSecundario, signo] = [comando.split(" ")[1].toLowerCase(), comando.split(" ")[2].toLowerCase()]
+        let [comandoSecundario, signo] = [comando.split(" ")[1], comando.split(" ")[2]]
         if(signos.includes(signo)){
             comandosValidos[comandoSecundario](message, client, signo)
             return
@@ -43,23 +46,47 @@ function gerarHoroscopo(signo,message,client){
 });
 }
 
-async function cadastrarHoroscopo(signo, message, client){
+async function cadastrarHoroscopo(message, client, signo){
     let [user, created] = await db.findOrCreate({
         where:{
-            numero:message.from,
-        }
+            numero: message.from,
+            isDeleted: false
+        },
+        defaults:{numero: message.from}
     })
-    user.signos = [()=>"oi"]
-    await user.save()
-    console.log(user.toJSON().signos)
+    if(!created){
+        let signos = user.signo.split(",")
+        if(!signos.includes(signo)){
+            signos.push(signo)
+            user.signo = signos
+            user.save()
+            client.reply(message.from, "Tudo certo, acrescentei mais este signo na sua lista de horóscopos diários!", message.id)
+            return
+        }else{
+            client.reply(message.from, "Ops! Você já cadastrou este signo!", message.id)
+            return 
+        }
+    }else{
+        user.signo = [signo]
+        user.save()
+        client.reply(message.from, "Tudo certo, irei mandar o horóscopo deste signo diariamente!", message.id)
+        return
+    }
+
 } 
 
-function desativarHoroscopo(signo, message, client){
-    console.log("Signo diario desativado")
+function desativarHoroscopo(message, client, signo){
+    console.log("TESTE")
 }
-message = {
-    'from':'511242'
+
+function checkHour(){
+    setInterval(function () {
+        var dataAtual = new Date(); // Data e hora do momento da execução
+        // console.log(dataAtual.getHours()+ "-" + dataAtual.getMinutes() + "-" + dataAtual.getSeconds())
+        if (dataAtual.getHours() == 8 && dataAtual.getMinutes() == 0 && dataAtual.getSeconds() == 0){
+            console.log("Envie os horoscopos para todos")
+        }
+    }, 1000);
 }
-cadastrarHoroscopo('leao', message, 'oi')
 
 inscrever("#horoscopo", run)

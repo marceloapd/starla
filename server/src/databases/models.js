@@ -1,13 +1,13 @@
 const sequelize = require("./config.js").sequelize
 const { DataTypes } = require('sequelize')
 
-const Horoscopo = sequelize.define('Horoscopo', {
+const User = sequelize.define('User', {
     numero: {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false
     },
-    signos:{
+    signo:{
         type: DataTypes.ARRAY(DataTypes.TEXT),
     },
     isCadastrado: {
@@ -26,6 +26,6 @@ const Horoscopo = sequelize.define('Horoscopo', {
 // })
 
 module.exports = {
-    Horoscopo,
+    User,
     sequelize
 }

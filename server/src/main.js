@@ -15,17 +15,19 @@ venom.create()
     
     //Função que inicia o bot
     async function start(client) {
-        client.onMessage(async function (message) {
-            verificarValidacao(message, (erro, comandoValido) => {
-                try{
-                    if (erro){
-                        return mensageiro.enviarMensagemError(message, client, erro)
+        client.onMessage(function (message) {
+            if(message.isGroupMsg === false){
+                verificarValidacao(message, (erro, comandoValido) => {
+                    try{
+                        if (erro){
+                            return mensageiro.enviarMensagemError(message, client, erro)
+                        }
+                        chamarComando(comandoValido, message, client)
+                    }catch(e){
+                        mensageiro.enviarMensagem(message, client, e.message)
                     }
-                    await chamarComando(comandoValido, message, client)
-                }catch(e){
-                    mensageiro.enviarMensagem(message, client, e.message)
-                }
-            }) 
+                }) 
+            }
     })
 }
 
