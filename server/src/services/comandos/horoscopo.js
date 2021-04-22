@@ -12,7 +12,7 @@ let signos = [
 
 let comandosValidos = {
     "diario" : cadastrarHoroscopo,
-    "sair" : desativarHoroscopo
+    "sair" : sairHoroscopo
 }
 
 function run(comando, message, client){
@@ -50,7 +50,7 @@ async function cadastrarHoroscopo(message, client, signo){
     let [user, created] = await db.findOrCreate({
         where:{
             numero: message.from,
-            isDeleted: false
+            isDeleted: false,
         },
         defaults:{numero: message.from}
     })
@@ -75,8 +75,27 @@ async function cadastrarHoroscopo(message, client, signo){
 
 } 
 
-function desativarHoroscopo(message, client, signo){
-    console.log("TESTE")
+async function sairHoroscopo(message, client, signo){
+    let user = await db.findOne({
+        where:{
+            numero: message.from
+        }
+    })
+    if(user && user.signo){
+        let signos = user.signo.split(",")
+        if(signos.includes(signo)){
+            signos.splice(signos.indexOf(signo), 1)
+            user.signo = signos
+            user.save()
+            client.reply(message.from, "Pronto! Você não receberá mais o horóscopo deste signo!", message.id)
+            return
+        }else{
+            client.reply(message.from, "Você não possui um cadastro para este signo!", message.id)
+            return
+        }
+    }
+    client.reply(message.from, "Você não possui nenhum signo cadastrado", message.id)
+    return
 }
 
 function checkHour(){
@@ -90,3 +109,4 @@ function checkHour(){
 }
 
 inscrever("#horoscopo", run)
+

@@ -16,7 +16,6 @@ venom.create()
     //Função que inicia o bot
     async function start(client) {
         client.onMessage(function (message) {
-            if(message.isGroupMsg === false){
                 verificarValidacao(message, (erro, comandoValido) => {
                     try{
                         if (erro){
@@ -27,7 +26,6 @@ venom.create()
                         mensageiro.enviarMensagem(message, client, e.message)
                     }
                 }) 
-            }
-    })
+         })
 }
 

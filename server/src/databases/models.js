@@ -10,10 +10,6 @@ const User = sequelize.define('User', {
     signo:{
         type: DataTypes.ARRAY(DataTypes.TEXT),
     },
-    isCadastrado: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true
-    },
     isDeleted: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
