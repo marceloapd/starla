@@ -1,8 +1,17 @@
 const inscrever = require("../../controllers/comandos").inscrever
 
+let tipos_permitidos = [
+    'image',
+    'video'
+]
+
 async function run(comando, message, client){
     try {
-        figurinha(message, client)
+        if(tipos_permitidos.includes(message.type)){
+            figurinha(message, client)
+        }
+        client.reply(message.from, "Eu não sei lidar com este tipo de arquivo!", message.id)
+        return 
     } catch (e) {
         console.log("Error ao criar figurinha: ", e)
     }
