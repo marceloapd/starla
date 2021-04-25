@@ -66,5 +66,6 @@ function getComandos(){
   
       return string;
   }
+  
 
 module.exports = {verificarValidacao}

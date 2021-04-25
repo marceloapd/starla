@@ -16,6 +16,7 @@ let comandosValidos = {
 }
 
 function run(comando, message, client){
+
     let comandoSecundario = comando.split(" ")[1] || null
     if(!comandoSecundario){
         throw({"message":"Acho que você esqueceu de inserir o signo"})
@@ -98,15 +99,20 @@ async function sairHoroscopo(message, client, signo){
     return
 }
 
-function checkHour(){
-    setInterval(function () {
-        var dataAtual = new Date(); // Data e hora do momento da execução
-        // console.log(dataAtual.getHours()+ "-" + dataAtual.getMinutes() + "-" + dataAtual.getSeconds())
-        if (dataAtual.getHours() == 8 && dataAtual.getMinutes() == 0 && dataAtual.getSeconds() == 0){
-            console.log("Envie os horoscopos para todos")
-        }
-    }, 1000);
-}
+// function checkHour(){
+//     var cron = require('node-cron');
+
+//     cron.schedule('0 8 * * *', () => {
+//       console.log('Running a job at 08:00 at America/Sao_Paulo timezone');
+//         //
+//         //usar um map para chamar o array de signos um de cada vez na função de gerar horoscopo
+//         //gerarHoroscopo()
+//     }, {
+//       scheduled: true,
+//       timezone: "America/Sao_Paulo"
+
+//     });
+// }
 
 inscrever("#horoscopo", run)
 
