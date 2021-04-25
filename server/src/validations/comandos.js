@@ -76,12 +76,28 @@ function getComandos(){
         'image',
         'video'
     ]
+    let palavras_negadas = ['#figurinha']
     for(index in tipos_validos_privado){
         if(message.type == tipos_validos_privado[index]){
             return {
                 'status':'valido',
                 'comandoCompleto':'#figurinha',
             }
+        }
+    }
+    if(message.type == 'chat'){
+        let comandos = getComandos()
+        for(index in comandos){
+            if(message.body.startsWith(comandos[index].comando.substring(0,4))){
+                return {
+                    'status':'talvez',
+                    'message':comandos[index].comando
+                }
+            }
+        }
+        return {
+            'status':'invalido',
+            'message':'invalido'
         }
     }
     return {

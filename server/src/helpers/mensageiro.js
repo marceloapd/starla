@@ -3,7 +3,7 @@ function enviarMensagemError(message, client, erro){
     if (erro.status == "talvez"){
         texto = `Acredito que você quis dizer ${erro.message} 😄, lembre-se que se tiver em duvida sobre algum comando digite #comandos`
     }else if(erro.status == "privado"){
-        texto = `Bom, ${message.sender.pushname | message.author}, eu não sei manipular este tipo de arquivo!`
+        texto = `Bom, ${message.sender.pushname}, eu não sei manipular este tipo de arquivo!`
     }else{
         texto = `😭 Desculpa, ${message.sender.pushname}, ainda não sou capaz de entender tudo oque voce diz, mas consigo fazer algumas coisas como`
     }
