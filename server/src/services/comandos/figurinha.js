@@ -11,6 +11,10 @@ async function run(comando, message, client){
             figurinha(message, client)
             return
         }
+        else if(message.type == 'chat'){
+            client.reply(message.from, "Acho que você esqueceu da imagem 😄", message.id)
+            return
+        }
         client.reply(message.from, "Eu não sei lidar com este tipo de arquivo!", message.id)
         return 
     } catch (e) {
