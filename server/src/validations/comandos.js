@@ -1,5 +1,8 @@
 function verificarValidacao(message, callback){
-    comando = validarComando(getComandoByTipo(message))
+    let comando = validarComandoGrupo(getComandoByTipo(message))
+    if(message.isGroupMsg == false){
+        console.log("privado")
+    }
     if (comando.status == "invalido"){
         return callback(comando)
     }
@@ -19,7 +22,7 @@ function getComandoByTipo(message){
     return message.body
 }
  
-function validarComando(comandoRecebido){
+function validarComandoGrupo(comandoRecebido){
     comandoRecebido = removerAcentos(comandoRecebido.toLowerCase())
     let comandoPrimario = comandoRecebido.split(" ")[0].toLowerCase()
     let comandos = getComandos()
@@ -65,6 +68,14 @@ function getComandos(){
       }
   
       return string;
+  }
+
+  function validarComandoPrivado(message){
+    
+  }
+
+  function converterComandoPrivado(){
+
   }
 
 module.exports = {verificarValidacao}

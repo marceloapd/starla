@@ -74,7 +74,6 @@ async function cadastrarHoroscopo(message, client, signo){
     }
 
 } 
-
 async function sairHoroscopo(message, client, signo){
     let user = await db.findOne({
         where:{
