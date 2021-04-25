@@ -1,8 +1,19 @@
 const inscrever = require("../../controllers/comandos").inscrever
+const gify = require('gify')
+
+let tipos_permitidos = [
+    'image',
+    'video'
+]
 
 async function run(comando, message, client){
     try {
-        figurinha(message, client)
+        if(tipos_permitidos.includes(message.type)){
+            figurinha(message, client)
+            return
+        }
+        client.reply(message.from, "Eu não sei lidar com este tipo de arquivo!", message.id)
+        return 
     } catch (e) {
         console.log("Error ao criar figurinha: ", e)
     }
@@ -14,7 +25,22 @@ async function figurinha(message, client){
             if(message.quotedMsg.type === 'image'){
                 replySendImageSticker(client,message)
             }
-        }else{
+        }else if(message.type == 'video'){
+            const base = await client.downloadMedia(message)
+            await converterBase64(base, "copy.mp4")
+            var opts = {
+                height: 300,
+                rate: 10
+              };
+            gify('./assets/images/copy.mp4', './assets/images/copy.gif',opts,function(err){
+                if (err) throw err;
+                client.sendImageAsStickerGif(message.from, "./assets/images/copy.gif")
+                console.log(`[${message.sender.id}] Figurinha criada`)
+                client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
+                enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
+              })
+        }
+        else{
             const base = await client.downloadMedia(message)
             await converterBase64(base, "copy.png")
             await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
@@ -41,13 +67,13 @@ async function replySendImageSticker (client, message) {
     }
 }
 
-const converterBase64 =async function (base, file_name) {
+async function converterBase64(base, file_name) {
     let formated_base = base.split(",")[1]
     const fs = require('fs')
-    await fs.writeFileSync(`./assets/images/${file_name}`, formated_base, { encoding: 'base64' })
+    fs.writeFileSync(`./assets/images/${file_name}`, formated_base, { encoding: 'base64' })
 }
 
-const enviarResposta = async function (text, client, message) {
+async function enviarResposta   (text, client, message) {
     try {
         await client.reply(message.from, `${text}`, message.id)
     } catch (e) {
