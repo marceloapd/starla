@@ -116,6 +116,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 server/src/tokens
-server/src/assets/images/*
+server/src/assets/images/copy*
 teste.js
 server/src/tokens/session.data.json
