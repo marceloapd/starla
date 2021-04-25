@@ -2,7 +2,6 @@ const inscrever = require("../../controllers/comandos").inscrever
 const request = require('request');
 const { JSDOM } = require('jsdom')
 const db = require('../../databases/models').User
-const sequelize = require('../../databases/models').sequelize
 
 let signos = [
     "aquario", "peixes", "aries", "touro", "gemeos",
@@ -23,7 +22,7 @@ function run(comando, message, client){
     }
     if ( signos.includes(comandoSecundario)){
         let signo = comandoSecundario
-        gerarHoroscopo(signo,message,client)
+        gerarEnviarHoroscopo(signo,message,client)
         return
     }
     else if(comandosValidos[comandoSecundario]){
@@ -37,14 +36,15 @@ function run(comando, message, client){
     throw({'message':`Desculpe, eu não reconheço este comando: ${comandoSecundario}`})
 }
 
-function gerarHoroscopo(signo,message,client){
+function gerarEnviarHoroscopo(signo, message, client){
+    let horoscopo
     request(`https://joaobidu.com.br/horoscopo/signos/previsao-${signo}`, function (_, response, body) {
         if(response.statusCode != 200) throw({'message':'Erro ao pesquisar este horoscopo'})
         const { document } = new JSDOM(body).window
-        let horoscopo = document.querySelector('.texto').querySelectorAll('p')
-        horoscopo = `${horoscopo[0].textContent} \n ${horoscopo[1].textContent}`
+       let  horoscopo = document.querySelector('.texto').querySelectorAll('p')
+        horoscopo =   `${horoscopo[0].textContent} \n ${horoscopo[1].textContent}`
         client.sendText(message.from, `_Aqui está o horoscopo do dia de ${signo.charAt(0).toUpperCase() + signo.slice(1)}, ${message.sender.pushname} 🧙‍♂️_ \n${horoscopo}`)
-});
+    });
 }
 
 async function cadastrarHoroscopo(message, client, signo){
@@ -97,18 +97,6 @@ async function sairHoroscopo(message, client, signo){
     client.reply(message.from, "Você não possui nenhum signo cadastrado", message.id)
     return
 }
-
-// function checkHour(){
-//     var cron = require('node-cron');
-
-//     cron.schedule('0 8 * * *', () => {
-//       console.log('Running a job at 08:00 at America/Sao_Paulo timezone');
-//     }, {
-//       scheduled: true,
-//       timezone: "America/Sao_Paulo"
-
-//     });
-// }
 
 inscrever("#horoscopo", run)
 

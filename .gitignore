@@ -116,3 +116,4 @@ dist
 .pnp.*
 copy.png
 server/src/tokens
+server/src/databases/storage.sqlite
