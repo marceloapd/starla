@@ -10,7 +10,7 @@ require("./incializador.js")
 //Instancia do whatsapp
 venom.create()
     .then(function (client) {
-        cron.schedule("* * * * *",()=>{
+        cron.schedule("0 8 * * *",()=>{
             taksCron.horoscopoDiario(client, "leao")
         })
         start(client)
