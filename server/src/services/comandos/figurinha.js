@@ -7,8 +7,13 @@ let tipos_permitidos = [
 
 async function run(comando, message, client){
     try {
-        if(tipos_permitidos.includes(message.type)){
+        if(tipos_permitidos.includes(message.type) || message.quotedMsg.type == 'image'){
             figurinha(message, client)
+            return
+        }
+        else if(message.type == 'chat'){
+            client.reply(message.from, "Acho que você esqueceu da imagem 😄", message.id)
+            return
         }
         client.reply(message.from, "Eu não sei lidar com este tipo de arquivo!", message.id)
         return 

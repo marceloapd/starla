@@ -1,11 +1,15 @@
+let status = ['talvez', 'invalido', 'privado']
+
 function verificarValidacao(message, callback){
-    comando = validarComando(getComandoByTipo(message))
-    if (comando.status == "invalido"){
-        return callback(comando)
+    let comando
+    if(message.isGroupMsg == false){
+        comando = validarConverterComandoPrivado(message)
+    }else{
+        comando = validarComandoGrupo(getComandoByTipo(message))
     }
-    else if(comando.status == "talvez"){
+    if (status.includes(comando.status)){
         return callback(comando)
-    }
+    }      
     callback(null, comando.comandoCompleto)
 }
 
@@ -19,7 +23,7 @@ function getComandoByTipo(message){
     return message.body
 }
  
-function validarComando(comandoRecebido){
+function validarComandoGrupo(comandoRecebido){
     comandoRecebido = removerAcentos(comandoRecebido.toLowerCase())
     let comandoPrimario = comandoRecebido.split(" ")[0].toLowerCase()
     let comandos = getComandos()
@@ -67,5 +71,41 @@ function getComandos(){
       return string;
   }
   
+
+  function validarConverterComandoPrivado(message){
+    let tipos_validos_privado = [
+        'image',
+        'video'
+    ]
+    let palavras_negadas = ['#figurinha']
+    for(index in tipos_validos_privado){
+        if(message.type == tipos_validos_privado[index]){
+            return {
+                'status':'valido',
+                'comandoCompleto':'#figurinha',
+            }
+        }
+    }
+    if(message.type == 'chat'){
+        let comandos = getComandos()
+        for(index in comandos){
+            if(message.body.startsWith(comandos[index].comando.substring(0,4))){
+                return {
+                    'status':'talvez',
+                    'message':comandos[index].comando
+                }
+            }
+        }
+        return {
+            'status':'invalido',
+            'message':'invalido'
+        }
+    }
+    return {
+        'status':'privado',
+        'message':'#figurinha'
+    }
+  }
+
 
 module.exports = {verificarValidacao}
