@@ -20,7 +20,6 @@ const User = sequelize.define('User', {
 // sequelize.sync({ force: true }).then(()=>{
 //     console.log("Tabelas Criadas!")
 // })
-
 module.exports = {
     User,
     sequelize

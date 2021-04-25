@@ -7,7 +7,7 @@ let tipos_permitidos = [
 
 async function run(comando, message, client){
     try {
-        if(tipos_permitidos.includes(message.type)){
+        if(tipos_permitidos.includes(message.type) || message.quotedMsg.type == 'image'){
             figurinha(message, client)
             return
         }

@@ -70,6 +70,7 @@ function getComandos(){
   
       return string;
   }
+  
 
   function validarConverterComandoPrivado(message){
     let tipos_validos_privado = [
