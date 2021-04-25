@@ -1,14 +1,13 @@
+let status = ['talvez', 'invalido', 'privado']
+
 function verificarValidacao(message, callback){
     let comando = validarComandoGrupo(getComandoByTipo(message))
     if(message.isGroupMsg == false){
-        console.log("privado")
+        comando = validarConverterComandoPrivado(message)
     }
-    if (comando.status == "invalido"){
+    if (status.includes(comando.status)){
         return callback(comando)
-    }
-    else if(comando.status == "talvez"){
-        return callback(comando)
-    }
+    }      
     callback(null, comando.comandoCompleto)
 }
 
@@ -70,12 +69,24 @@ function getComandos(){
       return string;
   }
 
-  function validarComandoPrivado(message){
-    
+  function validarConverterComandoPrivado(message){
+    let tipos_validos_privado = [
+        'image',
+        'video'
+    ]
+    for(index in tipos_validos_privado){
+        if(message.type == tipos_validos_privado[index]){
+            return {
+                'status':'valido',
+                'comandoCompleto':'#figurinha',
+            }
+        }
+    }
+    return {
+        'status':'privado',
+        'message':'#figurinha'
+    }
   }
 
-  function converterComandoPrivado(){
-
-  }
 
 module.exports = {verificarValidacao}
