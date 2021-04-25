@@ -1,4 +1,5 @@
 const inscrever = require("../../controllers/comandos").inscrever
+const gify = require('gify')
 
 let tipos_permitidos = [
     'image',
@@ -7,13 +8,8 @@ let tipos_permitidos = [
 
 async function run(comando, message, client){
     try {
-        if(tipos_permitidos.includes(message.type) || message.quotedMsg.type == 'image'){
+        if(tipos_permitidos.includes(message.type)){
             figurinha(message, client)
-            return
-        }
-        else if(message.type == 'chat'){
-            client.reply(message.from, "Acho que você esqueceu da imagem 😄", message.id)
-            return
         }
         client.reply(message.from, "Eu não sei lidar com este tipo de arquivo!", message.id)
         return 
@@ -28,7 +24,22 @@ async function figurinha(message, client){
             if(message.quotedMsg.type === 'image'){
                 replySendImageSticker(client,message)
             }
-        }else{
+        }else if(message.type == 'video'){
+            const base = await client.downloadMedia(message)
+            await converterBase64(base, "copy.mp4")
+            var opts = {
+                height: 300,
+                rate: 10
+              };
+            gify('./assets/images/copy.mp4', './assets/images/copy.gif',opts,function(err){
+                if (err) throw err;
+                client.sendImageAsStickerGif(message.from, "./assets/images/copy.gif")
+                console.log(`[${message.sender.id}] Figurinha criada`)
+                client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
+                enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
+              })
+        }
+        else{
             const base = await client.downloadMedia(message)
             await converterBase64(base, "copy.png")
             await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
