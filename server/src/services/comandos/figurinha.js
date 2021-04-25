@@ -10,6 +10,10 @@ async function run(comando, message, client){
         if(tipos_permitidos.includes(message.type)){
             figurinha(message, client)
         }
+        else if(message.type == 'chat'){
+            client.reply(message.from, "Acho que você esqueceu da imagem 😄", message.id)
+            return
+        }
         client.reply(message.from, "Eu não sei lidar com este tipo de arquivo!", message.id)
         return 
     } catch (e) {

@@ -17,7 +17,6 @@ venom.create()
     //Função que inicia o bot
     async function start(client) {
         client.onMessage(function (message) {
-            console.log(message)
             if(message.isGroupMsg == true && !isComando(message)){
                 return
             }

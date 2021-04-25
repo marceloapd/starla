@@ -1,9 +1,11 @@
 let status = ['talvez', 'invalido', 'privado']
 
 function verificarValidacao(message, callback){
-    let comando = validarComandoGrupo(getComandoByTipo(message))
+    let comando
     if(message.isGroupMsg == false){
         comando = validarConverterComandoPrivado(message)
+    }else{
+        comando = validarComandoGrupo(getComandoByTipo(message))
     }
     if (status.includes(comando.status)){
         return callback(comando)
