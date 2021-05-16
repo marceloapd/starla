@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "gifsicle": "^5.2.0",
     "gify": "^0.2.0",
+    "image-size": "^1.0.0",
     "jsdom": "^16.5.3",
     "node-cron": "^3.0.0",
     "request": "^2.88.2",
