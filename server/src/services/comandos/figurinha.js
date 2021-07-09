@@ -46,15 +46,13 @@ async function figurinha(message, client){
                     execFile(gifsicle, ['--crop', `0,${parseInt(crop*-1)}+${dimensions.width}x${dimensions.width}`, '-o', './assets/images/resize.gif', './assets/images/copy.gif'], err => {
                         client.sendImageAsStickerGif(message.from, "./assets/images/resize.gif")
                         console.log(`[${message.sender.id}] Figurinha criada`)
-                        client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
-                        enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
+                        PedirPix(client, message)
                     });
                 }else{
                     execFile(gifsicle, ['--crop', `${parseInt(crop)},0+${dimensions.height}x${dimensions.height}`, '-o', './assets/images/resize.gif', './assets/images/copy.gif'], err => {
                         client.sendImageAsStickerGif(message.from, "./assets/images/resize.gif")
                         console.log(`[${message.sender.id}] Figurinha criada`)
-                        client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
-                        enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
+                        PedirPix(client, message)
                       });
                 }
             })
@@ -64,8 +62,7 @@ async function figurinha(message, client){
             await converterBase64(base, "copy.png")
             await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
             console.log(`[${message.sender.id}] Figurinha criada`)
-            client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
-            enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
+            PedirPix(client, message)
         }
     }catch(e){
         console.log("Error ao criar figurinha: ", e)
@@ -78,8 +75,7 @@ async function replySendImageSticker (client, message) {
         converterBase64(base, "copy.png")
         await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
         console.log(`[${message.sender.id}] Figurinha criada por reply`)
-        client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
-        enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
+        PedirPix(client, message)
 
     } catch (e) {
         console.log("Error:", e)
@@ -97,6 +93,15 @@ async function enviarResposta   (text, client, message) {
         await client.reply(message.from, `${text}`, message.id)
     } catch (e) {
         console.log(e)
+    }
+}
+
+function PedirPix(client, message){
+    let probabilidade = Math.floor(Math.random() * (30 - 1 + 1)) + 1;
+
+    if(probabilidade == 1){
+        client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
+        enviarResposta("Aqui está sua Figurinha " + message.sender.pushname + ", não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: marcelo.apdassis@gmail.com", client, message)
     }
 }
 
