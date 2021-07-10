@@ -30,6 +30,7 @@ async function enviarFigurinha(message, client){
             await enviarFigurinhaPorReply(client, message, base64)
         }
     }else if(message.type == 'video'){
+        client.reply(message.from, `${message.sender.pushname} espera um pouquinho posso demorar para criar essa figurinha.`, message.id)
         await enviarFigurinhaAnimada(client, message, base64)
     }
     else{
