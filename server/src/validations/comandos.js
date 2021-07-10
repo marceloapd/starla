@@ -19,13 +19,16 @@ function verificarValidacao(message){
  * @returns retorna o tipo correto da mensagem que foi recebida
  */
 function getComandoByTipo(message){
-    tipos = ['caption', 'reply']
+    tipos = ['caption']
     for(tipo of tipos){
         if(message[tipo]){
             return message[tipo]
         }
     }
-    return message.body
+    if(!message.quotedMsg){
+        return message.body
+    }
+    throw({'message': `A funcionalidade de reply está desativada`, 'status': 'ignorar'})
 }
 
 /**
@@ -101,6 +104,8 @@ function validarConverterComandoPrivado(message){
     for(tipo of tipos_validos_privado){
         if(message.type == tipo){
             return {'message':'#figurinha'}
+        } else if(message.quotedMsg){
+            throw({'message': 'Está funcionalidade está removida temporariamente!', 'status': 'outros'})
         }
     }
     if(message.type == 'chat'){

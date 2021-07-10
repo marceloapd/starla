@@ -1,7 +1,6 @@
 let tipos_permitidos = [
     'caption',
     'body',
-    'reply'
 ]
 
 function isComando(message){

@@ -20,6 +20,8 @@ async function horoscopoDiario(client){
             })
         }
     })
+    let hoje = new Date()
+    console.log(`[Cron] Horoscopos enviados as ${hoje.getHours()}:${hoje.getMinutes()} horas`)
 }
 
 /**
@@ -30,7 +32,7 @@ async function horoscopoDiario(client){
  */
 function callbackHoroscopoDiario(_, response, body) {
     if(response.statusCode != 200){
-        throw({'message':'Erro ao pesquisar este horoscopo'})
+        throw({'message':'Erro ao pesquisar este horoscopo', 'status': 'outros'})
     } 
     
     const { document } = new JSDOM(body).window

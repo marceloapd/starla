@@ -1,8 +1,9 @@
+const loggerTerminal = require('./logger')
 
 let codigosError = {
     'talvez': talvezError,
     'invalido': invalidoError,
-    'outro': outroError
+    'outros': outrosError,
 }
 
 /**
@@ -12,19 +13,17 @@ let codigosError = {
  * @param {object} erro objeto de erro com as mensagens necessarias 
  */
 function enviarMensagemError(message, client, error){
-    status = error.status ? error.status : 'outro'
-    texto = codigosError[status](error, message)
-    client.reply(message.from, texto, message.id)
-}
+    if(!error.status){
+        loggerTerminal.mensagemLogError(message, error.message)
+        client.reply(message.from, 'Desculpe, algo deu errado!', message.id)
+    } else if(error.status === 'ignorar'){
+        return
+    } else {
+        status = error.status ? error.status : 'outros'
+        texto = codigosError[status](error, message)
+        client.reply(message.from, texto, message.id)
+    }
 
-/**
- * 
- * @param {object} message objeto da mensagem de um cliente 
- * @param {object} client objeto client venom
- * @param {string} texto texto que será enviado
- */
-function enviarMensagem(message, client, texto){
-    client.reply(message.from, texto, message.id)
 }
 
 function talvezError(error, message=null){
@@ -35,12 +34,10 @@ function invalidoError(error=null, message){
     return `😭 Desculpa, ${message.sender.pushname}, ainda não sou capaz de entender tudo oque voce diz!`
 }
 
-function outroError(error, message=null){
+function outrosError(error, message=null){
     return error.message
 }
 
-
 module.exports = {
     enviarMensagemError,
-    enviarMensagem
 }
