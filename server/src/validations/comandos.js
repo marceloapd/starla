@@ -1,28 +1,38 @@
-let status = ['talvez', 'invalido', 'privado']
-
-function verificarValidacao(message, callback){
-    let comando
-    if(message.isGroupMsg == false){
-        comando = validarConverterComandoPrivado(message)
+/**
+ * Verifica a validacao de um comando e padroniza o comando.
+ * @param {object} message Objeto da mensagem do cliente 
+ * @returns Um código validado que será usado para chamar o comando correto
+ */
+function verificarValidacao(message){
+    let resultado = {}
+    if(message.isGroupMsg === false){
+        resultado = validarConverterComandoPrivado(message)
     }else{
-        comando = validarComandoGrupo(getComandoByTipo(message))
+        resultado = validarComandoGrupo(getComandoByTipo(message))
     }
-    if (status.includes(comando.status)){
-        return callback(comando)
-    }      
-    callback(null, comando.comandoCompleto)
+    return resultado
 }
 
+/**
+ * Verifica o tipo correto da mensagem que foi enviada
+ * @param {object} message Objeto da mensagem do cliente 
+ * @returns retorna o tipo correto da mensagem que foi recebida
+ */
 function getComandoByTipo(message){
     tipos = ['caption', 'reply']
-    for(index in tipos){
-        if(message[tipos[index]]){
-            return message[tipos[index]]
+    for(tipo of tipos){
+        if(message[tipo]){
+            return message[tipo]
         }
     }
     return message.body
 }
- 
+
+/**
+ * Valida um comando
+ * @param {string} comandoRecebido Comando recebido 
+ * @returns um objeto com o comando validado
+ */
 function validarComandoGrupo(comandoRecebido){
     comandoRecebido = removerAcentos(comandoRecebido.toLowerCase())
     let comandoPrimario = comandoRecebido.split(" ")[0].toLowerCase()
@@ -30,82 +40,85 @@ function validarComandoGrupo(comandoRecebido){
     comandos.forEach((item, index, array)=>{
         array[index] = item.comando 
     })
+
     let response = {}
-    for(index in comandos){
-        if (comandoPrimario.startsWith(comandos[index].substring(0, 4))){
-            [response['message'], response['status']] = [comandos[index], "talvez"]
-            if(comandoPrimario == comandos[index]){
-                [response['status'], response['comandoCompleto']] = ["valido", comandoRecebido]
-                return response
+    for(let comando of comandos){
+        if (comandoPrimario.startsWith(comando.substring(0, 4))){
+            if(comandoPrimario == comando){
+                return {'message': comandoRecebido }
             }
-            return response
+            throw({'status': 'talvez', 'message': comando})
         }
     }
-    response['status'] = 'invalido'
-    return response
+    
+    throw({'status': 'invalido'})
 }
 
+/**
+ * @returns os comandos cadastrados no json
+ */
 function getComandos(){
     const fs = require('fs')
     return  JSON.parse(fs.readFileSync("./helpers/comandos.json"))
 }
 
-
- function removerAcentos( newStringComAcento ) {
+/**
+ * Remove os acentos
+ * @param {string} newStringComAcento String com acento 
+ * @returns string sem acentos
+ */
+function removerAcentos( newStringComAcento ) {
     var string = newStringComAcento;
-      var mapaAcentosHex 	= {
-          a : /[\xE0-\xE6]/g,
-          e : /[\xE8-\xEB]/g,
-          i : /[\xEC-\xEF]/g,
-          o : /[\xF2-\xF6]/g,
-          u : /[\xF9-\xFC]/g,
-          c : /\xE7/g,
-          n : /\xF1/g
-      };
-  
-      for ( var letra in mapaAcentosHex ) {
-          var expressaoRegular = mapaAcentosHex[letra];
-          string = string.replace( expressaoRegular, letra );
-      }
-  
-      return string;
+        var mapaAcentosHex 	= {
+            a : /[\xE0-\xE6]/g,
+            e : /[\xE8-\xEB]/g,
+            i : /[\xEC-\xEF]/g,
+            o : /[\xF2-\xF6]/g,
+            u : /[\xF9-\xFC]/g,
+            c : /\xE7/g,
+            n : /\xF1/g
+        };
+
+        for ( let letra in mapaAcentosHex ) {
+            let expressaoRegular = mapaAcentosHex[letra];
+            string = string.replace( expressaoRegular, letra );
+        }
+
+        return string;
   }
   
-
-  function validarConverterComandoPrivado(message){
+/**
+ * Valida e converte o comando do privado para um formato correto
+ * @param {object} message  Objeto da mensagem do cliente 
+ * @returns retorna um objeto com o comando que será usado
+ */
+function validarConverterComandoPrivado(message){
     let tipos_validos_privado = [
         'image',
         'video'
     ]
-    let palavras_negadas = ['#figurinha']
-    for(index in tipos_validos_privado){
-        if(message.type == tipos_validos_privado[index]){
-            return {
-                'status':'valido',
-                'comandoCompleto':'#figurinha',
-            }
+    
+    for(tipo of tipos_validos_privado){
+        if(message.type == tipo){
+            return {'message':'#figurinha'}
         }
     }
     if(message.type == 'chat'){
+        let comandoRecebido = message.body.split(' ')[0]
+        let comandoCompleto = message.body
         let comandos = getComandos()
-        for(index in comandos){
-            if(message.body.startsWith(comandos[index].comando.substring(0,4))){
-                return {
-                    'status':'talvez',
-                    'message':comandos[index].comando
+        for(let comando of comandos){
+            if(comandoRecebido.startsWith(comando.comando.substring(0,4))){
+                if(comandoRecebido === comando.comando){
+                    return {'message': comandoCompleto}
                 }
+                throw({'status': 'talvez', 'message': comando.comando})
             }
         }
-        return {
-            'status':'invalido',
-            'message':'invalido'
-        }
+        throw({'status': 'invalido', 'message': comandoRecebido})
     }
-    return {
-        'status':'privado',
-        'message':'#figurinha'
-    }
-  }
+    return {'message':'#figurinha'}
+}
 
 
 module.exports = {verificarValidacao}

@@ -119,3 +119,4 @@ server/src/tokens
 server/src/assets/images/copy*
 teste.js
 server/src/tokens/session.data.json
+*.jpg

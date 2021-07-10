@@ -7,11 +7,11 @@ const taksCron = require("./cron/tasks")
 const isComando = require("./validations/verificarHastTag").isComando
 require("./incializador.js")
 
-//Instancia do whatsapp
+
 venom.create()
     .then(function (client) {
         cron.schedule("0 8 * * *",()=>{
-            taksCron.horoscopoDiario(client, "leao")
+            taksCron.horoscopoDiario(client)
         })
         start(client)
     })
@@ -19,22 +19,21 @@ venom.create()
         console.error("Tivemos um erro: ", err)
     })
     
-    //Função que inicia o bot
-    async function start(client) {
-        client.onMessage(function (message) {
+/**
+ * Gerencia as validações e as execuções dos comandos
+ * @param {object} client Objeto client Venom 
+ */
+async function start(client) {
+    client.onMessage(async function(message) {
+        try{
             if(message.isGroupMsg == true && !isComando(message)){
                 return
             }
-            verificarValidacao(message, (erro, comandoValido) => {
-                try{
-                    if (erro){
-                        return mensageiro.enviarMensagemError(message, client, erro)
-                    }
-                    chamarComando(comandoValido, message, client)
-                }catch(e){
-                    mensageiro.enviarMensagem(message, client, e.message)
-                }
-            }) 
-        })
+            let resultado = verificarValidacao(message)
+            await chamarComando(resultado.message, message, client)
+        } catch(error){
+            mensageiro.enviarMensagemError(message, client, error)
+        }
+    }) 
 }
 
