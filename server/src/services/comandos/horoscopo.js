@@ -14,8 +14,13 @@ let comandosValidos = {
     "sair" : sairHoroscopo
 }
 
-function run(comando, message, client){
-
+/**
+ * Executa o comando correto para o horoscopo 
+ * @param {string} comando comando que será usado
+ * @param {object} message mensagem do cliente
+ * @param {object} client cliente venom
+ */
+async function run(comando, message, client){
     let comandoSecundario = comando.split(" ")[1] || null
     if(!comandoSecundario){
         throw({"message":"Acho que você esqueceu de inserir o signo"})
@@ -26,27 +31,51 @@ function run(comando, message, client){
         return
     }
     else if(comandosValidos[comandoSecundario]){
-        let [comandoSecundario, signo] = [comando.split(" ")[1], comando.split(" ")[2]]
-        if(signos.includes(signo)){
-            comandosValidos[comandoSecundario](message, client, signo)
-            return
-        }
-        throw({'message':'Este signo não foi encontrado'})
+        await executarComandoSecundario(message, client, comando)
+        return
     }
     throw({'message':`Desculpe, eu não reconheço este comando: ${comandoSecundario}`})
 }
 
+/**
+ * Faz um scraping para o signo selecionado e envia para o cliente
+ * @param {string} signo signo que será usado na pesquisa 
+ * @param {object} message mensagem do cliente
+ * @param {object} client cliente venom
+ */
 function gerarEnviarHoroscopo(signo, message, client){
-    let horoscopo
     request(`https://joaobidu.com.br/horoscopo/signos/previsao-${signo}`, function (_, response, body) {
-        if(response.statusCode != 200) throw({'message':'Erro ao pesquisar este horoscopo'})
+        if(response.statusCode != 200) {
+            throw({'message':'Erro ao pesquisar este horoscopo!'})
+        }
         const { document } = new JSDOM(body).window
-       let  horoscopo = document.querySelector('.texto').querySelectorAll('p')
-        horoscopo =   `${horoscopo[0].textContent} \n ${horoscopo[1].textContent}`
+        let  horoscopo = document.querySelector('.texto').querySelectorAll('p')
+        horoscopo = `${horoscopo[0].textContent} \n ${horoscopo[1].textContent}`
         client.sendText(message.from, `_Aqui está o horoscopo do dia de ${signo.charAt(0).toUpperCase() + signo.slice(1)}, ${message.sender.pushname} 🧙‍♂️_ \n${horoscopo}`)
     });
 }
 
+/**
+ * Executa o comando secundário do horoscopo
+ * @param {object} message mensagem do cliente
+ * @param {object} client cliente venom
+ * @param {strinjg} comando comando que será usado 
+ */
+async function executarComandoSecundario(message, client, comando){
+    let [comandoSecundario, signo] = [comando.split(" ")[1], comando.split(" ")[2]]
+        if(signos.includes(signo)){
+            await comandosValidos[comandoSecundario](message, client, signo)
+            return
+        }
+    throw({'message':'Este signo não foi encontrado!'})
+}
+
+/**
+ * Cadastra um signo para um cliente que será enviado no horosocopo diario
+ * @param {object} message mesagem do cliente
+ * @param {object} client cliente venom
+ * @param {string} signo signo que será cadastrado 
+ */
 async function cadastrarHoroscopo(message, client, signo){
     let [user, created] = await db.findOrCreate({
         where:{
@@ -64,17 +93,22 @@ async function cadastrarHoroscopo(message, client, signo){
             client.reply(message.from, "Tudo certo, acrescentei mais este signo na sua lista de horóscopos diários!", message.id)
             return
         }else{
-            client.reply(message.from, "Ops! Você já cadastrou este signo!", message.id)
-            return 
+            throw({'message': 'Ops! Você já cadastrou este signo!'})
         }
     }else{
         user.signo = [signo]
         user.save()
         client.reply(message.from, "Tudo certo, irei mandar o horóscopo deste signo diariamente!", message.id)
-        return
     }
 
 } 
+
+/**
+ * Retira um horoscopo do cliente do horoscopo diario
+ * @param {object} message mensagem do cliente
+ * @param {object} client cliente venom
+ * @param {string} signo signo que será retirado 
+ */
 async function sairHoroscopo(message, client, signo){
     let user = await db.findOne({
         where:{
@@ -90,12 +124,10 @@ async function sairHoroscopo(message, client, signo){
             client.reply(message.from, "Pronto! Você não receberá mais o horóscopo deste signo!", message.id)
             return
         }else{
-            client.reply(message.from, "Você não possui um cadastro para este signo!", message.id)
-            return
+            throw({'message': 'Você não possui um cadastro para este signo!'})
         }
     }
-    client.reply(message.from, "Você não possui nenhum signo cadastrado", message.id)
-    return
+    throw({'message': 'Você não possui nenhum signo cadastrado'})
 }
 
 inscrever("#horoscopo", run)

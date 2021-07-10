@@ -17,6 +17,6 @@
     "request": "^2.88.2",
     "sequelize": "^6.6.2",
     "sqlite3": "^5.0.2",
-    "venom-bot": "^3.0.8"
+    "venom-bot": "^3.0.21"
   }
 }
