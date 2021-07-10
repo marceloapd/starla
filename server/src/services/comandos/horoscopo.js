@@ -32,6 +32,9 @@ async function run(comando, message, client){
         return
     }
     else if(comandosValidos[comandoSecundario]){
+        if(message.isGroupMsg == true){
+            throw({'message': 'Estes comando está disponível apenas no privado', 'status': 'outros'})
+        }
         await executarComandoSecundario(message, client, comando)
         return
     }
