@@ -29,12 +29,10 @@ async function comandos(comando, message, client){
     }
 }
 
-
 function getComandos(){
     const fs = require('fs')
     return  JSON.parse(fs.readFileSync("./helpers/comandos.json"))
 }
-
 
 
 inscrever("#comandos", chatComandos)

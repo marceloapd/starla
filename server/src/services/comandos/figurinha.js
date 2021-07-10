@@ -22,7 +22,7 @@ async function run(comando, message, client){
 
 async function enviarFigurinha(message, client){
     if(message.duration > 7 || message.duration < 0){
-        throw({'message': `${message.sender.pushname}, eu só consigo criar figurinhas de videos com menos de 8 segundos! 😝`})
+        throw({'message': `${message.sender.pushname}, eu só consigo criar figurinhas de videos com menos de 8 segundos! 😝`, 'status': 'outros'})
     }
     const base64 = await client.downloadMedia(message)
     if(message.quotedMsg){
@@ -38,43 +38,35 @@ async function enviarFigurinha(message, client){
 }
 
 async function enviarFigurinhaComum(client, message, base64){
-    try{
-        await converterBase64(base64, "copy.png")
-        await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
-        loggerTerminal.mensagemLog(message, 'Figurinha criada')
-        pedirPix(client, message)
-    } catch(e){
-        loggerTerminal.mensagemLogError(message, e.message)
-    }
+    await converterBase64(base64, "copy.png")
+    await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
+    loggerTerminal.mensagemLog(message, 'Figurinha estatica criada')
+    pedirPix(client, message)
 }
 
 async function enviarFigurinhaAnimada(client, message, base64){
-    debugger
-    try{
-        await converterBase64(base64, "copy.mp4")
-        let opts = {
-                height: 300,
-                rate: 10
-        }
-        gify('./assets/images/copy.mp4', './assets/images/copy.gif', opts, async function(err){
-            if (err){
-                throw ({'message': 'Foi mal, algo de errado aconteceu!', 'error': err})
-            }
-            
-            let dimensions = sizeOf('./assets/images/copy.gif')
-            let crop = (dimensions.width - dimensions.height) / 2
-    
-            if(dimensions.width < dimensions.height){
-                await redimensionarImagem(client, message, dimensions, crop, 'horizontal')
-            }else{
-                await redimensionarImagem(client, message, dimensions, crop)
-            }
-
-            loggerTerminal.mensagemLog(message, 'Figurinha animada criada')
-        })
-    } catch(e){
-        loggerTerminal.mensagemLogError(message, e)
+    await converterBase64(base64, "copy.mp4")
+    let opts = {
+            height: 300,
+            rate: 10
     }
+    gify('./assets/images/copy.mp4', './assets/images/copy.gif', opts, async function(err){
+        if (err){
+            console.log(err)
+            throw ({'message': 'Foi mal, algo de errado aconteceu!'})
+        }
+        
+        let dimensions = sizeOf('./assets/images/copy.gif')
+        let crop = (dimensions.width - dimensions.height) / 2
+
+        if(dimensions.width < dimensions.height){
+            await redimensionarImagem(client, message, dimensions, crop, 'horizontal')
+        }else{
+            await redimensionarImagem(client, message, dimensions, crop)
+        }
+
+        loggerTerminal.mensagemLog(message, 'Figurinha animada criada')
+    })
 }
 
 async function redimensionarImagem(client, message, dimensions, crop, position='vertical'){
@@ -94,14 +86,10 @@ async function redimensionarImagem(client, message, dimensions, crop, position='
 }
 
 async function enviarFigurinhaPorReply(client, message, base64) {
-    try {
-        await converterBase64(base64, "copy.png")
-        await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
-        loggerTerminal.mensagemLog(message, 'Figurinha criada reply')
-        pedirPix(client, message)
-    } catch (error) {
-        loggerTerminal.mensagemLogError(message, error.message)
-    }
+    await converterBase64(base64, "copy.png")
+    await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
+    loggerTerminal.mensagemLog(message, 'Figurinha criada por reply')
+    pedirPix(client, message)
 }
 
 async function converterBase64(base, file_name) {
