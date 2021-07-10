@@ -115,8 +115,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-server/src/tokens
-server/src/assets/images/copy*
+server/src/tokens/*
+server/src/assets/*
 teste.js
-server/src/tokens/session.data.json
 *.jpg
+server/src/assets/images/*
