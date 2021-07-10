@@ -20,46 +20,50 @@ async function run(comando, message, client){
 }
 
 async function figurinha(message, client){
-    try{
-        if(message.quotedMsg){
-            if(message.quotedMsg.type === 'image'){
-                replySendImageSticker(client,message)
-            }
-        }else if(message.type == 'video'){
-            const base = await client.downloadMedia(message)
-            await converterBase64(base, "copy.mp4")
-            var opts = {
-                height: 300,
-                rate: 10
-              };
-            gify('./assets/images/copy.mp4', './assets/images/copy.gif',opts,function(err){
-                if (err) throw err;
-                var dimensions = sizeOf('./assets/images/copy.gif')
-                let crop = (dimensions.width - dimensions.height) / 2
-                if(dimensions.width < dimensions.height){
-                    execFile(gifsicle, ['--crop', `0,${parseInt(crop*-1)}+${dimensions.width}x${dimensions.width}`, '-o', './assets/images/resize.gif', './assets/images/copy.gif'], err => {
-                        client.sendImageAsStickerGif(message.from, "./assets/images/resize.gif")
-                        console.log(`[${message.sender.id}] Figurinha criada`)
-                        PedirPix(client, message)
-                    });
-                }else{
-                    execFile(gifsicle, ['--crop', `${parseInt(crop)},0+${dimensions.height}x${dimensions.height}`, '-o', './assets/images/resize.gif', './assets/images/copy.gif'], err => {
-                        client.sendImageAsStickerGif(message.from, "./assets/images/resize.gif")
-                        console.log(`[${message.sender.id}] Figurinha criada`)
-                        PedirPix(client, message)
-                      });
+    if(message.duration<=7){
+        try{
+            if(message.quotedMsg){
+                if(message.quotedMsg.type === 'image'){
+                    replySendImageSticker(client,message)
                 }
-            })
+            }else if(message.type == 'video'){
+                const base = await client.downloadMedia(message)
+                await converterBase64(base, "copy.mp4")
+                var opts = {
+                    height: 300,
+                    rate: 10
+                  };
+                gify('./assets/images/copy.mp4', './assets/images/copy.gif',opts,function(err){
+                    if (err) throw err;
+                    var dimensions = sizeOf('./assets/images/copy.gif')
+                    let crop = (dimensions.width - dimensions.height) / 2
+                    if(dimensions.width < dimensions.height){
+                        execFile(gifsicle, ['--crop', `0,${parseInt(crop*-1)}+${dimensions.width}x${dimensions.width}`, '-o', './assets/images/resize.gif', './assets/images/copy.gif'], err => {
+                            client.sendImageAsStickerGif(message.from, "./assets/images/resize.gif")
+                            console.log(`[${message.sender.id}] Figurinha criada`)
+                            PedirPix(client, message)
+                        });
+                    }else{
+                        execFile(gifsicle, ['--crop', `${parseInt(crop)},0+${dimensions.height}x${dimensions.height}`, '-o', './assets/images/resize.gif', './assets/images/copy.gif'], err => {
+                            client.sendImageAsStickerGif(message.from, "./assets/images/resize.gif")
+                            console.log(`[${message.sender.id}] Figurinha criada`)
+                            PedirPix(client, message)
+                          });
+                    }
+                })
+            }
+            else{
+                const base = await client.downloadMedia(message)
+                await converterBase64(base, "copy.png")
+                await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
+                console.log(`[${message.sender.id}] Figurinha criada`)
+                PedirPix(client, message)
+            }
+        }catch(e){
+            console.log("Error ao criar figurinha: ", e)
         }
-        else{
-            const base = await client.downloadMedia(message)
-            await converterBase64(base, "copy.png")
-            await client.sendImageAsSticker(message.from, "./assets/images/copy.png")
-            console.log(`[${message.sender.id}] Figurinha criada`)
-            PedirPix(client, message)
-        }
-    }catch(e){
-        console.log("Error ao criar figurinha: ", e)
+    }else{
+        enviarResposta(`${message.sender.pushname}, eu so consigo criar figurinhas de videos com menos de 8 segundos! 😝`, client, message)
     }
 }
 
@@ -82,7 +86,7 @@ async function converterBase64(base, file_name) {
     fs.writeFileSync(`./assets/images/${file_name}`, formated_base, { encoding: 'base64' })
 }
 
-async function enviarResposta   (text, client, message) {
+async function enviarResposta(text, client, message) {
     try {
         await client.reply(message.from, `${text}`, message.id)
     } catch (e) {
