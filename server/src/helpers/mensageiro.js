@@ -3,7 +3,7 @@ const loggerTerminal = require('./logger')
 let codigosError = {
     'talvez': talvezError,
     'invalido': invalidoError,
-    'outros': outrosError
+    'outros': outrosError,
 }
 
 /**
@@ -15,21 +15,15 @@ let codigosError = {
 function enviarMensagemError(message, client, error){
     if(!error.status){
         loggerTerminal.mensagemLogError(message, error.message)
+        client.reply(message.from, 'Desculpe, algo deu errado!', message.id)
+    } else if(error.status === 'ignorar'){
+        return
+    } else {
+        status = error.status ? error.status : 'outros'
+        texto = codigosError[status](error, message)
+        client.reply(message.from, texto, message.id)
     }
 
-    status = error.status ? error.status : 'outros'
-    texto = codigosError[status](error, message)
-    client.reply(message.from, texto, message.id)
-}
-
-/**
- * 
- * @param {object} message objeto da mensagem de um cliente 
- * @param {object} client objeto client venom
- * @param {string} texto texto que será enviado
- */
-function enviarMensagem(message, client, texto){
-    client.reply(message.from, texto, message.id)
 }
 
 function talvezError(error, message=null){
@@ -44,8 +38,6 @@ function outrosError(error, message=null){
     return error.message
 }
 
-
 module.exports = {
     enviarMensagemError,
-    enviarMensagem
 }

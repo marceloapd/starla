@@ -7,7 +7,6 @@ const taksCron = require("./cron/tasks")
 const isComando = require("./validations/verificarHastTag").isComando
 require("./incializador.js")
 
-
 venom.create()
     .then(function (client) {
         cron.schedule("0 8 * * *",()=>{
@@ -19,6 +18,7 @@ venom.create()
         console.error("Tivemos um erro: ", err)
     })
     
+
 /**
  * Gerencia as validações e as execuções dos comandos
  * @param {object} client Objeto client Venom 

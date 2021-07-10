@@ -10,7 +10,8 @@ var sizeOf = require('image-size');
 
 let tipos_permitidos = [
     'image',
-    'video'
+    'video',
+    'chat'
 ]
 
 async function run(comando, message, client){
@@ -25,11 +26,13 @@ async function enviarFigurinha(message, client){
         throw({'message': `${message.sender.pushname}, eu só consigo criar figurinhas de videos com menos de 8 segundos! 😝`, 'status': 'outros'})
     }
     const base64 = await client.downloadMedia(message)
-    if(message.quotedMsg){
-        if(message.quotedMsg.type === 'image'){
-            await enviarFigurinhaPorReply(client, message, base64)
-        }
-    }else if(message.type == 'video'){
+    //A função de client.downloadMedia do Venom não está funcionando com uma quoted msg
+        // if(message.quotedMsg){
+        //     if(message.quotedMsg.type === 'image'){
+        //         await enviarFigurinhaPorReply(client, message, base64)
+        //     }
+        // }
+    if(message.type == 'video'){
         client.reply(message.from, `${message.sender.pushname} espera um pouquinho posso demorar para criar essa figurinha.`, message.id)
         await enviarFigurinhaAnimada(client, message, base64)
     }
