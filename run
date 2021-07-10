@@ -21,3 +21,8 @@ if [ "$1" == "clear" ] || [ "$1" == "clear/" ];then
     rm -rf ./tokens/*
     echo -e "Tokens apagados!"
 fi
+
+if [ "$1" == "debug" ] || [ "$1" == "debug/" ];then
+    cd server/src
+    node inspect main.js    
+fi

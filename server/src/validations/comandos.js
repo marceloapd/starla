@@ -4,7 +4,7 @@
  * @returns Um código validado que será usado para chamar o comando correto
  */
 function verificarValidacao(message){
-    let resultado
+    let resultado = {}
     if(message.isGroupMsg === false){
         resultado = validarConverterComandoPrivado(message)
     }else{
@@ -44,15 +44,14 @@ function validarComandoGrupo(comandoRecebido){
     let response = {}
     for(let comando of comandos){
         if (comandoPrimario.startsWith(comando.substring(0, 4))){
-            [response['message'], response['status']] = [comando, "talvez"]
             if(comandoPrimario == comando){
                 return {'message': comandoRecebido }
             }
-            throw new Error(response)
+            throw({'status': 'talvez', 'message': comando})
         }
     }
-    response['status'] = 'invalido'
-    throw new Error(response)
+    
+    throw({'status': 'invalido'})
 }
 
 /**
@@ -98,7 +97,6 @@ function validarConverterComandoPrivado(message){
         'image',
         'video'
     ]
-    let palavras_negadas = ['#figurinha']
     
     for(tipo of tipos_validos_privado){
         if(message.type == tipo){
@@ -106,17 +104,18 @@ function validarConverterComandoPrivado(message){
         }
     }
     if(message.type == 'chat'){
-        let comandoRecebido = message.body
+        let comandoRecebido = message.body.split(' ')[0]
+        let comandoCompleto = message.body
         let comandos = getComandos()
         for(let comando of comandos){
             if(comandoRecebido.startsWith(comando.comando.substring(0,4))){
-                if(comandoRecebido === comando.comando && !palavras_negadas.includes(comandoRecebido)){
-                    return {'message': comandoRecebido}
+                if(comandoRecebido === comando.comando){
+                    return {'message': comandoCompleto}
                 }
-                throw new Error({'status': 'talvez', 'message': comando})
+                throw({'status': 'talvez', 'message': comando.comando})
             }
         }
-        throw new Error({'status': 'invalido'})
+        throw({'status': 'invalido', 'message': comandoRecebido})
     }
     return {'message':'#figurinha'}
 }

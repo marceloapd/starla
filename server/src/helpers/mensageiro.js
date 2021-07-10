@@ -1,16 +1,19 @@
+
+let codigosError = {
+    'talvez': talvezError,
+    'invalido': invalidoError,
+    'outro': outroError
+}
+
 /**
  * Retorna uma mensagem de erro para o cliente
  * @param {object} message objeto da mensagem de um cliente
  * @param {object} client objeto client venom
  * @param {object} erro objeto de erro com as mensagens necessarias 
  */
-function enviarMensagemError(message, client, erro){
-    let texto;
-    if (erro.status == "talvez"){
-        texto = `Acredito que você quis dizer ${erro.message} 😄, lembre-se que se tiver em duvida sobre algum comando digite #comandos`
-    } else {
-        texto = `😭 Desculpa, ${message.sender.pushname}, ainda não sou capaz de entender tudo oque voce diz!`
-    }
+function enviarMensagemError(message, client, error){
+    status = error.status ? error.status : 'outro'
+    texto = codigosError[status](error, message)
     client.reply(message.from, texto, message.id)
 }
 
@@ -23,6 +26,19 @@ function enviarMensagemError(message, client, erro){
 function enviarMensagem(message, client, texto){
     client.reply(message.from, texto, message.id)
 }
+
+function talvezError(error, message=null){
+    return  `Acredito que você quis dizer ${error.message} 😄, lembre-se que se tiver em duvida sobre algum comando digite #comandos`
+}
+
+function invalidoError(error=null, message){
+    return `😭 Desculpa, ${message.sender.pushname}, ainda não sou capaz de entender tudo oque voce diz!`
+}
+
+function outroError(error, message=null){
+    return error.message
+}
+
 
 module.exports = {
     enviarMensagemError,

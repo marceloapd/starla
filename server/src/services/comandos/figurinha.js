@@ -12,17 +12,11 @@ let tipos_permitidos = [
 ]
 
 async function run(comando, message, client){
-
-    try {
-        if(tipos_permitidos.includes(message.type)){
-            figurinha(message, client)
-            return
-        }
-        client.reply(message.from, "Eu não sei lidar com este tipo de arquivo!", message.id)
-        return 
-    } catch (e) {
-        console.log("Error ao criar figurinha: ", e)
+    if(tipos_permitidos.includes(message.type)){
+        await figurinha(message, client)
+        return
     }
+    throw({'message':'Você esqueceu da imagem!'})
 }
 
 async function figurinha(message, client){

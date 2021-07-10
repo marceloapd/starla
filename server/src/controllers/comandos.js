@@ -6,9 +6,9 @@ let observadores = {}
  * @param {object} message objeto da menssagem do cliente
  * @param {object} client cliente venom
  */
-function chamarComando(comando, message, client){
+async function chamarComando(comando, message, client){
     let comandoFormatado = comando.split(" ")[0].toLowerCase()
-    observadores[comandoFormatado](comando.toLowerCase(), message, client) 
+    await observadores[comandoFormatado](comando.toLowerCase(), message, client) 
 }
 
 

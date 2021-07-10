@@ -30,9 +30,9 @@ async function start(client) {
                 return
             }
             let resultado = verificarValidacao(message)
-            chamarComando(resultado.message, message, client)
+            await chamarComando(resultado.message, message, client)
         } catch(error){
-            mensageiro.enviarMensagem(message, client, error.message)
+            mensageiro.enviarMensagemError(message, client, error)
         }
     }) 
 }
