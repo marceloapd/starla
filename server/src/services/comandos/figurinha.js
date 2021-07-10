@@ -11,7 +11,6 @@ var sizeOf = require('image-size');
 let tipos_permitidos = [
     'image',
     'video',
-    'chat'
 ]
 
 async function run(comando, message, client){
@@ -19,6 +18,7 @@ async function run(comando, message, client){
         await enviarFigurinha(message, client)
         return
     }
+    throw({'message': 'Acho que você esqueceu da imagem!', 'status': 'outros'})
 }
 
 async function enviarFigurinha(message, client){
@@ -33,7 +33,7 @@ async function enviarFigurinha(message, client){
         //     }
         // }
     if(message.type == 'video'){
-        client.reply(message.from, `${message.sender.pushname} espera um pouquinho posso demorar para criar essa figurinha.`, message.id)
+        client.reply(message.from, `Um minuto, ${message.sender.pushname}, criar figurinha animada dá um trabalho...`, message.id)
         await enviarFigurinhaAnimada(client, message, base64)
     }
     else{
