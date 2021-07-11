@@ -5,17 +5,12 @@
         "descricaoPrivado":"\n\n*Criar figurinhas -->* me envie uma foto que irei criar uma figurinha para você"
     },
     {
-        "comando":"#horoscopo",
-        "descricao":"\n\n➤ *#horoscopo* para consultar seu horoscopo digite esse comando seguido de seu signo.\n(exemplo: #horoscopo escorpiao)\n\n➤ *#horoscopo diario* para receber seu horoscopo diariamente digite esse comando seguido de seu signo.",
-        "descricaoPrivado":"\n\n➤ *#horoscopo* para consultar seu horoscopo digite esse comando seguido de seu signo.\n(exemplo: #horoscopo escorpiao)\n\n➤ *#horoscopo diario* para receber seu horoscopo diariamente digite esse comando seguido de seu signo."
-    },
-    {
         "comando":"#comandos"
-
-
+        
+        
     },
     {
         "comando":"@556184047039"
     }
-
+    
 ]

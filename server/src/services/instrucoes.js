@@ -1,4 +1,4 @@
-const inscrever = require("../../controllers/comandos").inscrever
+const inscrever = require("../controllers/comandos").inscrever
 
 
 async function chatComandos(comando, message, client){

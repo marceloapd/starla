@@ -1,8 +1,8 @@
-const inscrever = require("../../controllers/comandos").inscrever
+const inscrever = require("../controllers/comandos").inscrever
 const request = require('request');
 const { JSDOM } = require('jsdom')
-const db = require('../../databases/models').User
-const loggerTerminal =  require('../../helpers/logger')
+const db = require('../databases/models').User
+const loggerTerminal =  require('../helpers/logger')
 
 let signos = [
     "aquario", "peixes", "aries", "touro", "gemeos",

@@ -1,7 +1,7 @@
-const inscrever = require("../../controllers/comandos").inscrever
+const inscrever = require("../controllers/comandos").inscrever
 const gify = require('gify')
 const fs = require('fs')
-const loggerTerminal = require('../../helpers/logger')
+const loggerTerminal = require('../helpers/logger')
 
 const { execFile } = require('child_process');
 const gifsicle = require('gifsicle');
