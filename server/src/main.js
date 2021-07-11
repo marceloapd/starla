@@ -9,9 +9,9 @@ require("./incializador.js")
 
 venom.create()
     .then(function (client) {
-        cron.schedule("0 8 * * *",()=>{
-            taksCron.horoscopoDiario(client)
-        })
+        // cron.schedule("0 8 * * *",()=>{
+        //     taksCron.horoscopoDiario(client)
+        // })
         start(client)
     })
     .catch(function (err) {
