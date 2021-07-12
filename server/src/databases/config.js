@@ -1,16 +1,15 @@
 const { Sequelize } = require('sequelize')
+const configs = require('../config.json')
 
 const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './databases/storage.sqlite',
+    dialect: configs.dialect,
+    storage: configs.storage,
     logging: false
 })
 try{
-    sequelize.authenticate().then((_)=>{
-        console.log("Banco de dados conectado!")
-    })
+    sequelize.authenticate()
 }catch(e){
-    console.error("Banco de dados não conectado:",e)
+    console.error("Banco de dados não conectado:", e)
 }
 module.exports = {
     sequelize

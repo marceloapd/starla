@@ -1,10 +1,12 @@
+require('./databases/config')
+
 const venom = require('venom-bot')
+
 const chamarComando = require("./controllers/comandos").chamarComando
 const verificarValidacao = require("./validations/comandos").verificarValidacao
-const mensageiro = require("./helpers/mensageiro")
 const isComando = require("./validations/verificarHastTag").isComando
-// const cron = require("node-cron")
-// const taksCron = require("./cron/tasks")
+const mensageiro = require("./helpers/mensageiro")
+const serviceUsuario = require('./services/usuario')
 
 require("./incializador.js")
 
@@ -28,6 +30,7 @@ venom.create()
 async function start(client) {
     client.onMessage(async function(message) {
         try{
+            await serviceUsuario.salvarUsuarioGrupo(message)
             if(message.isGroupMsg == true && !isComando(message)){
                 return
             }
