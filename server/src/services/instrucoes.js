@@ -36,4 +36,3 @@ function getComandos(){
 
 
 inscrever("#comandos", chatComandos)
-inscrever("@556184047039", comandos)
