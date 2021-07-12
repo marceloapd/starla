@@ -2,10 +2,12 @@ const venom = require('venom-bot')
 const chamarComando = require("./controllers/comandos").chamarComando
 const verificarValidacao = require("./validations/comandos").verificarValidacao
 const mensageiro = require("./helpers/mensageiro")
-const cron = require("node-cron")
-const taksCron = require("./cron/tasks")
 const isComando = require("./validations/verificarHastTag").isComando
+// const cron = require("node-cron")
+// const taksCron = require("./cron/tasks")
+
 require("./incializador.js")
+
 
 venom.create()
     .then(function (client) {

@@ -19,7 +19,7 @@ function enviarMensagemError(message, client, error){
     } else if(error.status === 'ignorar'){
         return
     } else {
-        status = error.status ? error.status : 'outros'
+        status = error.status
         texto = codigosError[status](error, message)
         client.reply(message.from, texto, message.id)
     }

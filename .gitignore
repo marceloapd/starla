@@ -120,3 +120,4 @@ server/src/assets/*
 teste.js
 *.jpg
 server/src/assets/images/*
+server/src/assets/images/resize.gif
