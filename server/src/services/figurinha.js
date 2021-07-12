@@ -33,7 +33,6 @@ async function enviarFigurinha(message, client){
         //     }
         // }
     if(message.type == 'video'){
-        client.reply(message.from, `Um minuto, ${message.sender.pushname}, criar figurinha animada dá um trabalho...`, message.id)
         await enviarFigurinhaAnimada(client, message, base64)
     }
     else{
@@ -49,15 +48,20 @@ async function enviarFigurinhaComum(client, message, base64){
 }
 
 async function enviarFigurinhaAnimada(client, message, base64){
+    client.reply(message.from, `Um minuto, ${message.sender.pushname}, criar figurinha animada dá muito trabalho...`, message.id)
     await converterBase64(base64, "copy.mp4")
-    let opts = {
-            height: 300,
-            rate: 10
+    await converterMP4toGIF(client, message)
+}
+
+async function converterMP4toGIF(client, message){
+    let options = {
+        height: 300,
+        rate: 10
     }
-    gify('./assets/images/copy.mp4', './assets/images/copy.gif', opts, async function(err){
+    gify('./assets/images/copy.mp4', './assets/images/copy.gif', options, async (err) => {
         if (err){
             console.log(err)
-            throw ({'message': 'Foi mal, algo de errado aconteceu!'})
+            throw({'status': null})
         }
         
         let dimensions = sizeOf('./assets/images/copy.gif')
