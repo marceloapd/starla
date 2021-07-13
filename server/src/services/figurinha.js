@@ -34,7 +34,11 @@ async function enviarFigurinha(message, client){
         //     }
         // }
     if(message.type == 'video'){
-        await enviarFigurinhaAnimada(client, message, base64)
+        if(message.isGif){
+            await enviarFigurinhaAnimada(client, message, base64)
+        }else{
+            client.reply(message.from, `${message.sender.pushname} me envie esse video em formato de GIF para eu criar uma figurinha!`, message.id)
+        }
     }
     else{
         await enviarFigurinhaComum(client, message, base64)
