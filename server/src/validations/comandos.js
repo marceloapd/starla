@@ -25,10 +25,11 @@ function getComandoByTipo(message){
             return message[tipo]
         }
     }
-    if(!message.quotedMsg){
+    if(!message.quotedMsgObj){
         return message.body
+        throw({'message': `A funcionalidade de reply está desativada`, 'status': 'outros'})
     }
-    throw({'message': `A funcionalidade de reply está desativada`, 'status': 'ignorar'})
+    throw({'message': `A funcionalidade de reply está desativada`, 'status': 'outros'})
 }
 
 /**
