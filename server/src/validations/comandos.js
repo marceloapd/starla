@@ -19,16 +19,17 @@ function verificarValidacao(message){
  * @returns retorna o tipo correto da mensagem que foi recebida
  */
 function getComandoByTipo(message){
-    tipos = ['caption']
+    let tipos = ['caption']
     for(tipo of tipos){
         if(message[tipo]){
             return message[tipo]
         }
     }
-    if(!message.quotedMsg){
+    if(!message.quotedMsgObj){
         return message.body
+        throw({'message': `A funcionalidade de reply está desativada`, 'status': 'outros'})
     }
-    throw({'message': `A funcionalidade de reply está desativada`, 'status': 'ignorar'})
+    throw({'message': `A funcionalidade de reply está desativada`, 'status': 'outros'})
 }
 
 /**
@@ -44,7 +45,6 @@ function validarComandoGrupo(comandoRecebido){
         array[index] = item.comando 
     })
 
-    let response = {}
     for(let comando of comandos){
         if (comandoPrimario.startsWith(comando.substring(0, 4))){
             if(comandoPrimario == comando){
