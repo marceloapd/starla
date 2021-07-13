@@ -31,11 +31,22 @@ function talvezError(error, message=null){
 }
 
 function invalidoError(error=null, message){
-    return `😭 Desculpa, ${message.sender.pushname}, ainda não sou capaz de entender tudo oque voce diz!`
+    let texto = getTextoWithName(message, `Ainda não sou capaz de entender tudo oque voce diz! 😭` )
+    return texto
 }
 
 function outrosError(error, message=null){
     return error.message
+}
+
+function getTextoWithName(message, texto){
+    let nome = message.sender.pushname || ''
+    if(nome){
+        let primeiraLetra = texto.charAt(0).toLowerCase()
+        texto = `${primeiraLetra}${texto.substring(1)}` 
+        texto = `${nome}, ${texto}`
+    }
+    return texto
 }
 
 module.exports = {

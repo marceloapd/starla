@@ -29,6 +29,7 @@ venom.create()
  */
 async function start(client) {
     client.onMessage(async function(message) {
+        debugger
         try{
             await serviceUsuario.salvarUsuarioGrupo(message)
             if(message.isGroupMsg == true && !isComando(message)){

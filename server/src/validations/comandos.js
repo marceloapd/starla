@@ -19,7 +19,7 @@ function verificarValidacao(message){
  * @returns retorna o tipo correto da mensagem que foi recebida
  */
 function getComandoByTipo(message){
-    tipos = ['caption']
+    let tipos = ['caption']
     for(tipo of tipos){
         if(message[tipo]){
             return message[tipo]
@@ -44,7 +44,6 @@ function validarComandoGrupo(comandoRecebido){
         array[index] = item.comando 
     })
 
-    let response = {}
     for(let comando of comandos){
         if (comandoPrimario.startsWith(comando.substring(0, 4))){
             if(comandoPrimario == comando){

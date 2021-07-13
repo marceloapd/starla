@@ -23,7 +23,8 @@ async function run(comando, message, client){
 
 async function enviarFigurinha(message, client){
     if(message.duration > 7 || message.duration < 0){
-        throw({'message': `${message.sender.pushname}, eu só consigo criar figurinhas de videos com menos de 8 segundos! 😝`, 'status': 'outros'})
+        let texto = getTextoWithName(message, 'Eu só consigo criar figurinhas de videos com menos de 8 segundos! 😝')
+        throw({'message': `${texto}`, 'status': 'outros'})
     }
     const base64 = await client.downloadMedia(message)
     //A função de client.downloadMedia do Venom não está funcionando com uma quoted msg
@@ -48,7 +49,8 @@ async function enviarFigurinhaComum(client, message, base64){
 }
 
 async function enviarFigurinhaAnimada(client, message, base64){
-    client.reply(message.from, `Um minuto, ${message.sender.pushname}, criar figurinha animada dá muito trabalho...`, message.id)
+    let texto = getTextoWithName(message, `Vai demorar um pouco...`)
+    client.reply(message.from, texto, message.id)
     await converterBase64(base64, "copy.mp4")
     await converterMP4toGIF(client, message)
 }
@@ -108,10 +110,20 @@ async function converterBase64(base, file_name) {
 function pedirPix(client, message){
     let probabilidade = Math.floor(Math.random() * (30 - 1 + 1)) + 1;
     if(probabilidade == 1){
-        let texto =`Aqui está sua Figurinha, ${message.sender.pushname}.Não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: assisserverdev@gmail.com`
+        let texto = getTextoWithName(message, `Aqui está sua Figurinha. Não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: assisserverdev@gmail.com`)
         client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
         client.reply(message.from, texto, message.id)
     }
+}
+
+function getTextoWithName(message, texto){
+    let nome = message.sender.pushname || ''
+    if(nome){
+        let primeiraLetra = texto.charAt(0).toLowerCase()
+        texto = `${primeiraLetra}${texto.substring(1)}` 
+        texto = `${nome}, ${texto}`
+    }
+    return texto
 }
 
 inscrever("#figurinha", run)
