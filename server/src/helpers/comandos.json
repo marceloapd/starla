@@ -1,8 +1,8 @@
 [
     {
         "comando":"#figurinha",
-        "descricao":"\n\n➤ *#figurinha* mencione uma foto que alguem do grupo enviou utilizando esse comando ou me mande uma foto com esse comando de legenda que irei criar uma figurinha, tambem consigo criar figurinhas animadas com videos ou gifs",
-        "descricaoPrivado":"\n\n*Criar figurinhas -->* me envie uma foto que irei criar uma figurinha para você"
+        "descricao":"\n\n➤ *#figurinha* Envie uma foto, gif ou um vídeo em formato gif com a legenda #figurinha e veja a mágica acontecer!",
+        "descricaoPrivado":"\n\n*Criar figurinhas -->* Você só precisa me enviar uma foto, gif ou um vídeo em formato gif e o resto é comigo!"
     },
     {
         "comando":"#comandos"

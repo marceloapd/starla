@@ -23,8 +23,7 @@ async function run(comando, message, client){
 
 async function enviarFigurinha(message, client){
     if(message.duration > 7 || message.duration < 0){
-        let texto = getTextoWithName(message, 'Eu só consigo criar figurinhas de videos com menos de 8 segundos! 😝')
-        throw({'message': `${texto}`, 'status': 'outros'})
+        throw({'message': getTextoWithName(message, 'Eu só consigo criar figurinhas de videos com menos de 8 segundos! 😝'), 'status': 'outros'})
     }
     const base64 = await client.downloadMedia(message)
     //A função de client.downloadMedia do Venom não está funcionando com uma quoted msg
@@ -37,7 +36,7 @@ async function enviarFigurinha(message, client){
         if(message.isGif){
             await enviarFigurinhaAnimada(client, message, base64)
         }else{
-            client.reply(message.from, `${message.sender.pushname} me envie esse video em formato de GIF para eu criar uma figurinha!`, message.id)
+            throw({'message': getTextoWithName(message, 'Me envie o video em formato de GIF para eu criar uma figurinha!' ), 'status': 'outros'})
         }
     }
     else{
@@ -53,7 +52,7 @@ async function enviarFigurinhaComum(client, message, base64){
 }
 
 async function enviarFigurinhaAnimada(client, message, base64){
-    let texto = getTextoWithName(message, `Vai demorar um pouco...`)
+    let texto = getTextoWithName(message, `Vai demorar um pouco pra criar a figurinha...`)
     client.reply(message.from, texto, message.id)
     await converterBase64(base64, "copy.mp4")
     await converterMP4toGIF(client, message)

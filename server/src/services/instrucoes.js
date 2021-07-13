@@ -3,7 +3,7 @@ const inscrever = require("../controllers/comandos").inscrever
 
 async function chatComandos(comando, message, client){
     let comandos = getComandos()
-    let boasVindas = `Ola, ${message.sender.pushname}, me chamo Starla e sou um robô 🤖 desenvolvido para executar algumas funções como:\n`
+    let boasVindas = `Olá, ${message.sender.pushname}, me chamo Starla e fui desenvolvida para executar algumas funções como:\n`
     let pix = `\n\n${message.sender.pushname}, se puder,  me ajude a permanecer viva ☺️ apoiando meu desenvolvimento doando qualquer valor no PIX EMAIL: assisserverdev@gmail.com`
     
     if(message.isGroupMsg == true){
