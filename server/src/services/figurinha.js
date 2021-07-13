@@ -22,9 +22,7 @@ async function run(comando, message, client){
 }
 
 async function enviarFigurinha(message, client){
-    if(message.duration > 7 || message.duration < 0){
-        throw({'message': getTextoWithName(message, 'Eu só consigo criar figurinhas de videos com menos de 8 segundos! 😝'), 'status': 'outros'})
-    }
+   
     const base64 = await client.downloadMedia(message)
     //A função de client.downloadMedia do Venom não está funcionando com uma quoted msg
         // if(message.quotedMsg){
@@ -36,10 +34,11 @@ async function enviarFigurinha(message, client){
         if(message.isGif){
             await enviarFigurinhaAnimada(client, message, base64)
         }else{
-            throw({'message': getTextoWithName(message, 'Me envie o video em formato de GIF para eu criar uma figurinha!' ), 'status': 'outros'})
+            throw({'message': getTextoWithName(message, 'Me envie o video em formato de GIF!' ), 'status': 'outros'})
         }
-    }
-    else{
+    } else if(message.duration > 7 || message.duration < 0){
+        throw({'message': getTextoWithName(message, 'Eu só consigo criar figurinhas de gifs com menos de 8 segundos! 😝'), 'status': 'outros'})
+    } else{
         await enviarFigurinhaComum(client, message, base64)
     }
 }
