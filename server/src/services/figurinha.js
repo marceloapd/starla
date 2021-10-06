@@ -52,7 +52,7 @@ async function enviarFigurinhaComum(client, message, base64){
 
 async function enviarFigurinhaAnimada(client, message, base64){
     let texto = getTextoWithName(message, `Vai demorar um pouco pra criar a figurinha...`)
-    client.reply(message.from, texto, message.id)
+    client.sendText(message.from, texto)
     await converterBase64(base64, "copy.mp4")
     await converterMP4toGIF(client, message)
 }
@@ -114,7 +114,7 @@ function pedirPix(client, message){
     if(probabilidade == 1){
         let texto = getTextoWithName(message, `Aqui está sua Figurinha. Não se esqueça de apoiar o meu desenvolvimento doando qualquer valor no PIX EMAIL: assisserverdev@gmail.com`)
         client.sendImageAsStickerGif(message.from, './assets/emojis/pixEmoji.gif')
-        client.reply(message.from, texto, message.id)
+        client.sendText(message.from, texto)
     }
 }
 

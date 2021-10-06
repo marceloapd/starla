@@ -95,7 +95,7 @@ async function cadastrarHoroscopo(message, client, signo){
             signos.push(signo)
             user.signo = signos
             user.save()
-            client.reply(message.from, "Tudo certo, acrescentei mais este signo na sua lista de horóscopos diários!", message.id)
+            client.sendText(message.from, "Tudo certo, acrescentei mais este signo na sua lista de horóscopos diários!")
             loggerTerminal.mensagemLog(message, `Horoscopo cadastrado: ${signo}`)
             return
         }else{
@@ -104,7 +104,7 @@ async function cadastrarHoroscopo(message, client, signo){
     }else{
         user.signo = [signo]
         user.save()
-        client.reply(message.from, "Tudo certo, irei mandar o horóscopo deste signo diariamente!", message.id)
+        client.sendText(message.from, "Tudo certo, irei mandar o horóscopo deste signo diariamente!")
         loggerTerminal.mensagemLog(message, `Horoscopo cadastrado: ${signo}`)
     }
 
@@ -128,7 +128,7 @@ async function sairHoroscopo(message, client, signo){
             signos.splice(signos.indexOf(signo), 1)
             user.signo = signos
             user.save()
-            client.reply(message.from, "Pronto! Você não receberá mais o horóscopo deste signo!", message.id)
+            client.sendText(message.from, "Pronto! Você não receberá mais o horóscopo deste signo!")
             loggerTerminal.mensagemLog(message, `Horoscopo removido: ${signo}`)
             return
         }else{
