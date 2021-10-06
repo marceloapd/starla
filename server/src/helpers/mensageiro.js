@@ -15,13 +15,13 @@ let codigosError = {
 function enviarMensagemError(message, client, error){
     if(!error.status){
         loggerTerminal.mensagemLogError(message, error.message)
-        client.reply(message.from, 'Desculpe, algo deu errado!', message.id)
+        client.sendText(message.from, 'Desculpe, algo deu errado!')
     } else if(error.status === 'ignorar'){
         return
     } else {
-        status = error.status
-        texto = codigosError[status](error, message)
-        client.reply(message.from, texto, message.id)
+        const status = error.status
+        const texto = codigosError[status](error, message)
+        client.sendText(message.from, texto)
     }
 
 }
