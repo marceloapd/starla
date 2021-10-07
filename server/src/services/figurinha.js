@@ -22,7 +22,6 @@ async function run(comando, message, client){
 }
 
 async function enviarFigurinha(message, client){
-   
     const base64 = await client.downloadMedia(message)
     //A função de client.downloadMedia do Venom não está funcionando com uma quoted msg
         // if(message.quotedMsg){

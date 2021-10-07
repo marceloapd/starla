@@ -8,7 +8,7 @@ let observadores = {}
  */
 async function chamarComando(comando, message, client){
     let comandoFormatado = comando.split(" ")[0].toLowerCase()
-    await observadores[comandoFormatado](comando.toLowerCase(), message, client) 
+    await observadores[comandoFormatado](comando.toLowerCase(), message, client)
 }
 
 
