@@ -4,7 +4,7 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/assisDev/Starla?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/assisDev/Starla?style=for-the-badge)
 ![Bitbucket open issues](https://img.shields.io/bitbucket/assisDev/Starla?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/assisDev/Starla?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/assisDev/Plant-IOT?style=for-the-badge)
 
 <img src="https://user-images.githubusercontent.com/71731452/111242959-f4ba0e00-85de-11eb-873b-32ca87556165.gif" alt="gif-explicativa"> <img src="https://user-images.githubusercontent.com/71731452/111244354-7d39ae00-85e1-11eb-9e44-b1116645414e.png" alt="Starla"> 
 
@@ -74,19 +74,6 @@ Comandos nos chat de grupos:
 `#figurinha` Utilize esse comando de legenda que sera criado uma figurinha, tambem é possivel criar figurinhas animadas com videos ou gifs.
 
 <img src="https://user-images.githubusercontent.com/71731452/125382649-6ecf8900-e36c-11eb-909f-27de01dfc5f8.gif" alt="qr-code">
-
-
-## 📫 Contribuindo para <nome_do_projeto>
-<!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
-Para contribuir com <nome_do_projeto>, siga estas etapas:
-
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
-
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 ## 🤝 Colaboradores
 
