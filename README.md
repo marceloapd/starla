@@ -3,8 +3,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/assisDev/Starla?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/assisDev/Starla?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/assisDev/Starla?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/assisDev/Starla?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/assisDev/Plant-IOT?style=for-the-badge)
 
 <img src="https://user-images.githubusercontent.com/71731452/111242959-f4ba0e00-85de-11eb-873b-32ca87556165.gif" alt="gif-explicativa"> <img src="https://user-images.githubusercontent.com/71731452/111244354-7d39ae00-85e1-11eb-9e44-b1116645414e.png" alt="Starla"> 
 
@@ -73,7 +71,13 @@ Comandos nos chat de grupos:
 
 `#figurinha` Utilize esse comando de legenda que sera criado uma figurinha, tambem é possivel criar figurinhas animadas com videos ou gifs.
 
-<img src="https://user-images.githubusercontent.com/71731452/125382649-6ecf8900-e36c-11eb-909f-27de01dfc5f8.gif" alt="qr-code">
+<img src="https://user-images.githubusercontent.com/71731452/125382649-6ecf8900-e36c-11eb-909f-27de01dfc5f8.gif" alt="exemplo-grupo">
+
+Comandos no chat privado:
+
+`Mande videos, gifs e imagens para receber uma figurinha`
+
+<img src="https://user-images.githubusercontent.com/71731452/125382658-71ca7980-e36c-11eb-81af-01106799f032.gif" alt="exemplo-privado">
 
 ## 🤝 Colaboradores
 
