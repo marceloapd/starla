@@ -1,51 +1,120 @@
-## Sobre o projeto
-Trata-se de um BOT desenvolvido em Node.js com foco em criar rapidamente "stickers"  para WhatsApp.
+# Starla
+
+![GitHub repo size](https://img.shields.io/github/repo-size/assisDev/Starla?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/assisDev/Starla?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/assisDev/Starla?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/assisDev/Starla?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/assisDev/Starla?style=for-the-badge)
+
+<img src="https://user-images.githubusercontent.com/71731452/111242959-f4ba0e00-85de-11eb-873b-32ca87556165.gif" alt="gif-explicativa"> <img src="https://user-images.githubusercontent.com/71731452/111244354-7d39ae00-85e1-11eb-9e44-b1116645414e.png" alt="Starla"> 
+
+> Ola 👋, me chamo Starla.
+
+> Fui desenvolvida para criar figurinhas no whatsapp, consigo criar figurinhas a partir de gifs ou imagens.
+> Por enquanto eu só sei fazer isso mas eu acredito que seja de grande ajuda para a humanidade.
+
+### Ajustes e melhorias
+
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+
+- [x] Tarefa 1
+- [x] Tarefa 2
+- [x] Tarefa 3
+- [ ] Tarefa 4
+- [ ] Tarefa 5
+
+## 💻 Pré-requisitos
+
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+
+* Você instalou a versão mais recente de `<Node.js / ffmpeg / graphicsmagick>`
+* Você tem uma máquina `<Linux / Mac>`
+
+## 🚀 Instalando Starla
+
+Para instalar o Starla, siga estas etapas:
+
+Linux:
+```
+sudo apt install ffmpeg
+```
+```
+sudo apt-get install -y graphicsmagick
+```
+```
+sudo apt install chromium-browser
+```
+
+macOS:
+```
+brew install ffmpeg
+```
+```
+brew install graphicsmagick
+```
+
+Apos isso dentro da pasta server do projeto executamos o comando
+
+```
+npm install
+```
+
+## ☕ Usando Starla
+
+Para usar Starla, siga estas etapas:
+
+no root do projeto rode o comando e apos isso escaneie o qr code.
+```
+./run server
+```
+<img src="https://user-images.githubusercontent.com/71731452/136301244-527fc68b-1877-4b10-8c6c-605655cd71e5.png" alt="qr-code">
+
+Comandos nos chat de grupos:
+
+`#figurinha` Utilize esse comando de legenda que sera criado uma figurinha, tambem é possivel criar figurinhas animadas com videos ou gifs.
+
+<img src="https://user-images.githubusercontent.com/71731452/125382649-6ecf8900-e36c-11eb-909f-27de01dfc5f8.gif" alt="qr-code">
 
 
-![ezgif-2-926126238735 (1)](https://user-images.githubusercontent.com/71731452/111242959-f4ba0e00-85de-11eb-873b-32ca87556165.gif)   ![sadasdsad](https://user-images.githubusercontent.com/71731452/111244354-7d39ae00-85e1-11eb-9e44-b1116645414e.png) 
+## 📫 Contribuindo para <nome_do_projeto>
+<!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
+Para contribuir com <nome_do_projeto>, siga estas etapas:
 
-### Construido com
+1. Bifurque este repositório.
+2. Crie um branch: `git checkout -b <nome_branch>`.
+3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
+4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
+5. Crie a solicitação de pull.
 
-* [Venom-bot](https://www.npmjs.com/package/venom-bot)
+Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
+## 🤝 Colaboradores
 
-## Começando
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-* Instale o node.js [https://nodejs.org/en/](https://nodejs.org/en/)
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/71731452?v=4" width="100px;" alt="Foto do Marcelo Assis no GitHub"/><br>
+        <sub>
+          <b>Marcelo Assis</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/65235458?v=4" width="100px;" alt="Foto do Matheus Assis no GitHub"/><br>
+        <sub>
+          <b>Matheus Assis</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
+## 📝 Licença
 
-### Pré-requisitos
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
 
-* Node.js
-* WhatsApp
-
-### Instalação
-
-1. Clone o repositorio https://github.com/marceloapd/Starla
-2. Abre o terminal no diretorio do projeto
-3. execute o comando npm install
-4. no diretorio .\src\ execute o comando node index.js
-
-## Outras funcionalidades 
-
-Starla alem de criar figurinhas consegue consumir a API do SINESP, sendo assim pode fornecer dados de qualquer veiculo.
-
-![teste (1)](https://user-images.githubusercontent.com/71731452/111247678-3058d600-85e7-11eb-86bf-3a4a4e35a96f.png)
-
-## Uso
-
-Atualmente a Starla está online 24h por dia, você pode testa-la no _55 61 98404-7093_
-
-
-## Roadmap
-
-Consulte os [issues](https://github.com/AssisDev/starla/issues) para obter uma lista de recursos propostos (e problemas conhecidos).
-
-
-## Contribuindo
-
-Contribuição de novas funcionalidades serão bem vindas.
-
-## Licença
-
-Distributed under the MIT License. See `LICENSE` for more information.
+[⬆ Voltar ao topo](README.md)<br>
