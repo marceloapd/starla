@@ -1,3 +1,5 @@
+const openia = require('./openia')
+
 async function generateSticker(client, message){
     const buffer = await client.decryptFile(message)
     const base64String = buffer.toString('base64');
@@ -15,5 +17,18 @@ module.exports = {
         }else if (message.isGroupMsg == false){
             await generateSticker(client, message)
         }
+    },
+
+    async dalleSticker(client, message){
+        const imgDescription = message.text.substring(message.text.indexOf(" "));
+        const imgUrl = await openia.getDalleResponse(imgDescription + " whatsapp sticker", message)
+        await client.sendImageAsSticker(message.from, imgUrl)
+    },
+
+    async dalleImage(client, message){
+        const imgDescription = message.text.substring(message.text.indexOf(" "));
+        const imgUrl = await openia.getDalleResponse(imgDescription, message)
+        await client.sendImage(message.from, imgUrl)
     }
+
 }

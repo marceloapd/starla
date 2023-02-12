@@ -7,6 +7,12 @@ module.exports = {
             if (message.type == 'image' || message.type == 'video') {
                 await service.sticker.send(client, message)
             }
+            else if (message.type == 'chat' && message.text.startsWith("#figurinha")){
+                await service.sticker.dalleSticker(client, message)
+            }
+            else if (message.text.startsWith("/img")){
+                await service.sticker.dalleImage(client, message)
+            }
             else if (message.type == 'chat') {
                 await service.openia.chatgpt(client, message)
             }
